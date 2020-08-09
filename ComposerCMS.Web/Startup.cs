@@ -62,11 +62,11 @@ namespace ComposerCMS.API
             {
                 Theme _currentTheme = ComposerCMSApp.Themes.FirstOrDefault(a => a.Key == ComposerCMSApp.Settings.ThemeKey);
 
-                string _themePath = Path.Combine("themes", _currentTheme.Name);
+                string _themePath = Path.Combine("pages", "themes", _currentTheme.Name);
 
-                List<string> _pageOverrides = Directory.GetFiles($"pages/{_themePath}", "*.cshtml", searchOption: SearchOption.AllDirectories).Select(a =>
+                List<string> _pageOverrides = Directory.GetFiles($"{_themePath}", "*.cshtml", searchOption: SearchOption.AllDirectories).Select(a =>
                 {
-                    return "/" + a.Replace('\\', '/').Replace(".cshtml", string.Empty).ToLower();
+                    return a.Split("pages")[1].Replace('\\', '/').Replace(".cshtml", string.Empty).ToLower();
                 })
                 .ToList();
 
