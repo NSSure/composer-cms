@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>@ComposerCMSApp.GetTitle(ViewData)</title>
+
+    <link rel="stylesheet" href="~/composer-cms/plugins/bootstrap/css/bootstrap.min.css" />
+    <script src="~/composer-cms/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    @ComposerCMSApp.ApplyThemeCss()
+    @Html.Raw(ComposerCMSApp.Css)
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+    
+<body>
+    @await Component.InvokeAsync("MainMenu")
+    @RenderBody()
+</body>
+</html>

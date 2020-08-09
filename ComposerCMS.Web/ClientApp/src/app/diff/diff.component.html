@@ -1,0 +1,61 @@
+<style>
+  pre {
+    margin: 0;
+  }
+
+  td {
+    padding: 0 10px !important;
+    margin: 0 !important;
+  }
+</style>
+
+<div class="diff-component">
+  <div class="row">
+    <div class="col">
+      <div *ngIf="page">
+        <h5 class="mb-4">Previously Published Version - {{pageVersion.dateAdded | date: 'short'}}</h5>
+        <table>
+          <tbody>
+            <tr *ngFor="let item of previousOutput; let i = index;">
+              <td [style.padding]="'5px'"
+                  [style.text-align]="'center'"
+                  [style.vertical-align]="'top'"
+                  [style.background-color]="'#f7f7f7'">
+                {{i + 1}}
+              </td>
+              <td [style.background-color]="item.color">
+                <pre>{{item.text}}</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!page">
+        Loading
+      </div>
+    </div>
+    <div class="col">
+      <div *ngIf="pageVersion">
+        <h5 class="mb-4">Current Published Version - {{page.dateLastPublished | date: 'short'}}</h5>
+        <table>
+          <tbody>
+            <tr *ngFor="let item of currentOutput; let i = index;">
+              <td [style.padding]="'5px'"
+                  [style.text-align]="'center'"
+                  [style.vertical-align]="'top'"
+                  [style.background-color]="'#f7f7f7'">
+                {{i + 1}}
+              </td>
+              <td [style.background-color]="item.color">
+                <pre>{{item.text}}</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!pageVersion">
+        Loading
+      </div>
+    </div>
+  </div>
+</div>

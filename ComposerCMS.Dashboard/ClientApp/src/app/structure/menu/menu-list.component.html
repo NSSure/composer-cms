@@ -1,0 +1,35 @@
+<h4 class="mb-3">
+  <i class="fa fa-bars"></i> Menus
+</h4>
+
+<div class="card bg-light mb-4">
+  <div class="card-body">
+    <form class="form-inline justify-content-between">
+      <button type="button" class="btn btn-primary" routerLink="/menu">Create New Menu</button>
+    </form>
+  </div>
+</div>
+
+<table class="table table-striped table-centered">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Date Added</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let menu of menus">
+      <td>
+        <a [routerLink]="['/menu', menu.id]">
+          {{menu.name}}
+        </a>
+      </td>
+      <td>{{menu.dateAdded | date: 'short'}}</td>
+    </tr>
+    <tr *ngIf="menus.length === 0">
+      <td colspan="7">
+        There are no menus to display.
+      </td>
+    </tr>
+  </tbody>
+</table>

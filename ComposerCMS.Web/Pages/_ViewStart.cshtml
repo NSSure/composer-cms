@@ -1,0 +1,12 @@
+@using ComposerCMS.Core.Utility;
+@{
+    Layout = "_BaseLayout";
+
+    if (ComposerCMSApp.Settings == null)
+    {
+        using(ComposerCMS.Core.DAL.ComposerCMSContext context = new ComposerCMS.Core.DAL.ComposerCMSContext())
+        {
+            ComposerCMSApp.Settings = context.Settings.FirstOrDefault();
+        }
+    }
+}

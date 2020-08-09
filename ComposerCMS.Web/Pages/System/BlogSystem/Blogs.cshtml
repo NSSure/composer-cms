@@ -1,0 +1,28 @@
+﻿@page
+@model ComposerCMS.Web.Models.System.BlogSystem.BlogsModel
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<div class="container content-page">
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Blogs</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ComposerCMS.Core.Entity.Blog blog in this.Model.Blogs)
+            {
+                <tr>
+                    <td>
+                        <a href="@this.Model.RouteMap[blog.ID].Url">@blog.Name</a>
+                    </td>
+                    <td>@blog.Description</td>
+                    <td>@blog.DateAdded</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

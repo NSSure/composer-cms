@@ -1,0 +1,29 @@
+<div>
+  <div class="card bg-light my-4">
+    <div class="card-body">
+      <button class="btn btn-dark" (click)="save()">Save Menu</button>
+      <button class="btn" (click)="isMenuItem = true">Add Menu Item</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="menu.name" placeholder="Enter menu name">
+  </div>
+
+  <label>Menu Items</label>
+
+  <div class="form-inline mb-4" *ngIf="isMenuItem">
+    <input type="text" class="form-control mr-sm-2" id="inputEmail4" [(ngModel)]="menuItem.displayText" placeholder="Display text">
+
+    <select name="RouteID" class="form-control mr-sm-2" [(ngModel)]="menuItem.routeID">
+      <option *ngFor="let route of routes" [ngValue]="route.id">{{route.originalEntityText}}</option>
+    </select>
+
+    <input type="number" class="form-control mr-sm-2" id="Order" [(ngModel)]="menuItem.order" placeholder="Order">
+
+    <button type="button" class="btn btn-dark" (click)="saveMenuItem()">Save</button>
+  </div>
+
+  <menu-item-list [menuId]="menuId"></menu-item-list>
+</div>

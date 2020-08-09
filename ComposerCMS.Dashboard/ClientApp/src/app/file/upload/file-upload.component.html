@@ -1,0 +1,7 @@
+<input
+       [disabled]="progress > 0 && progress < 100"
+       #fileInput
+       type="file"
+       class="form-control-file"
+       (change)="upload(fileInput.files)"
+       style="background-color: #e7e7e7; padding: 15px; border: 2px dashed silver;" />
