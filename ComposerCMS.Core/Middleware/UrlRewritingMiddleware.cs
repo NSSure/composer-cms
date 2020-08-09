@@ -50,13 +50,6 @@ namespace ComposerCMS.Core.Middleware
                     //}
                 }
 
-                //Page _page = await pageUtility.FirstOrDefaultAsync(a => a.ID == _route.EntityID)
-
-                //string _path = Path.Combine(Constants.Path.ContentDirectory, "themes\\dark\\system\\BlogSystem");
-                //Directory.GetFiles(_path, "*.css", searchOption: SearchOption.AllDirectories);
-
-                //return "";
-
                 string[] _segments = _route.Url.Split("/", StringSplitOptions.RemoveEmptyEntries);
 
                 if (_segments.Length > 0)

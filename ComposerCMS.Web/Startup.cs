@@ -2,6 +2,7 @@ using ComposerCMS.Core;
 using ComposerCMS.Core.DAL;
 using ComposerCMS.Core.Identity;
 using ComposerCMS.Core.Middleware;
+using ComposerCMS.Core.Model;
 using ComposerCMS.Core.Utilities;
 using ComposerCMS.Core.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,6 +17,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ComposerCMS.API
@@ -56,11 +60,30 @@ namespace ComposerCMS.API
 
             services.AddRazorPages().AddRazorPagesOptions((options) =>
             {
+                Theme _currentTheme = ComposerCMSApp.Themes.FirstOrDefault(a => a.Key == ComposerCMSApp.Settings.ThemeKey);
+
+                string _themePath = Path.Combine("themes", _currentTheme.Name);
+
+                List<string> _pageOverrides = Directory.GetFiles($"pages/{_themePath}", "*.cshtml", searchOption: SearchOption.AllDirectories).Select(a =>
+                {
+                    return "/" + a.Replace('\\', '/').Replace(".cshtml", string.Empty).ToLower();
+                })
+                .ToList();
+
                 ComposerCMSApp.SystemRoutes.ForEach((routeSection) =>
                 {
                     routeSection.RouteItems.ForEach((routeItem) =>
                     {
-                        options.Conventions.AddPageRoute($"/{routeItem.PhysicalPath.Trim('/')}", routeItem.VirutalPath);
+                        string _themeOverride = _pageOverrides.FirstOrDefault(a => a.EndsWith(routeItem.PhysicalPath.ToLower()));
+
+                        if (!string.IsNullOrEmpty(_themeOverride))
+                        {
+                            options.Conventions.AddPageRoute(_themeOverride, routeItem.VirutalPath);
+                        }
+                        else
+                        {
+                            options.Conventions.AddPageRoute(routeItem.PhysicalPath, routeItem.VirutalPath);
+                        }
                     });
                 });
             })

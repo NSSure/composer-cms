@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Pages\Themes\dark\theme.css" />
+    <Content Include="Pages\Themes\dark\theme.scss" />
+    <Content Include="Pages\Themes\default\theme.css" />
+    <Content Include="Pages\Themes\default\theme.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />

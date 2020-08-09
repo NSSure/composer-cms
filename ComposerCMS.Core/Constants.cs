@@ -14,11 +14,11 @@ namespace ComposerCMS.Core
         /// </summary>
         public class Path
         {
-            public static string ContentDirectory = "wwwroot/composer-cms";
-            public static string CssDirectory = $"{ContentDirectory}/css";
-            public static string JsDirectory = $"{ContentDirectory}/js";
-            public static string MediaDirectory = $"{ContentDirectory}/media";
-            public static string ThemeDirectory = $"{ContentDirectory}/themes";
+            public static string ContentDirectory = @"wwwroot\composer-cms";
+            public static string CssDirectory = @$"{ContentDirectory}\css";
+            public static string JsDirectory = @$"{ContentDirectory}\js";
+            public static string MediaDirectory = @$"{ContentDirectory}\media";
+            public static string ThemeDirectory = @$"{ContentDirectory}\themes";
         }
 
         public class Href

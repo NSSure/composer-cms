@@ -206,6 +206,10 @@ namespace ComposerCMS.Core.DAL
                         context.SaveChanges();
                     }
                 }
+                else
+                {
+                    ComposerCMSApp.Settings = context.Settings.FirstOrDefault();
+                }
             }
         }
 
