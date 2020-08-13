@@ -159,18 +159,23 @@ namespace ComposerCMS.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseMiddleware<UrlRewritingMiddleware>();
 
             app.UseAuthentication();
-            app.UseRouting();
+
             app.UseStaticFiles();
             app.UseCors(options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
+            // Workaround: https://github.com/dotnet/aspnetcore/issues/13715
+            app.Use((context, next) =>
+            {
+                context.SetEndpoint(null);
+                return next();
+            });
+
+            app.UseRouting();
 
             app.UseEndpoints((endpoints) =>
             {

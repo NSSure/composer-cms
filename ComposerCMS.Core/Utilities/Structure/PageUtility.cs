@@ -64,8 +64,7 @@ namespace ComposerCMS.Core.Utility
             page.Content += $"{Environment.NewLine}{_resources}";
 
             // Write the file with a normalized name to the pages folder.
-            string _normalizedName = await this._fileUtil.WriteFile(page.Name, page.Content, isNavigatable: true);
-            page.Path = $"/{_normalizedName}";
+            await this._fileUtil.WriteFile(page);
 
             // Update the page entity in the database.
             await this.ProcessExitingPage(page, isPublished: true);

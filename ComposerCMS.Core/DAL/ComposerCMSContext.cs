@@ -111,6 +111,8 @@ namespace ComposerCMS.Core.DAL
                     if (context.Database.GetAppliedMigrations().Count() == 1)
                     {
                         List<Page> _pages = new List<Page>();
+                        List<PageVersion> _pageVersions = new List<PageVersion>();
+
                         List<Route> _routes = new List<Route>();
 
                         foreach (RouteSection routeSection in ComposerCMSApp.SystemRoutes)
@@ -146,13 +148,16 @@ namespace ComposerCMS.Core.DAL
                         {
                             foreach (RouteItem routeItem in routeSection.RouteItems)
                             {
+                                string _systemPagePath = Path.Combine(Environment.CurrentDirectory, "Pages", $"{routeItem.PhysicalPath.Trim('/')}.cshtml");
+                                string _fileName = Path.GetFileNameWithoutExtension(_systemPagePath);
+
+                                // TODO: Refactor so we don't have to do this twice.
+                                string _pageContents = File.ReadAllText(_systemPagePath);
+
+                                Page _systemPage = _pages.FirstOrDefault(a => a.Path == _systemPagePath);
+
                                 if (!routeItem.IsAbstract)
                                 {
-                                    string _systemPagePath = Path.Combine(Environment.CurrentDirectory, "Pages", $"{routeItem.PhysicalPath.Trim('/')}.cshtml");
-                                    string _fileName = Path.GetFileNameWithoutExtension(_systemPagePath);
-
-                                    Page _systemPage = _pages.FirstOrDefault(a => a.Path == _systemPagePath);
-
                                     _routes.Add(new Route()
                                     {
                                         EntityID = _systemPage.ID.ToString(),
@@ -161,10 +166,25 @@ namespace ComposerCMS.Core.DAL
                                         DateAdded = DateTime.UtcNow
                                     });
                                 }
+
+                                _pageVersions.Add(new PageVersion()
+                                {
+                                    Content = _pageContents,
+                                    DateAdded = DateTime.UtcNow,
+                                    DateLastUpdated = DateTime.UtcNow,
+                                    Name = _fileName,
+                                    Title = _fileName,
+                                    PageID = _systemPage.ID,
+                                    Path = _systemPage.Path,
+                                    UserIDAdded = default(Guid),
+                                    UserIDLastUpdated = default(Guid)
+                                });
                             }
                         }
 
                         context.Route.AddRange(_routes);
+                        context.PageVersion.AddRange(_pageVersions);
+
                         context.SaveChanges();
 
                         context.Settings.Add(new Settings()

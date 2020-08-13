@@ -64,7 +64,7 @@ namespace ComposerCMS.Web.Controllers
                     await this._layoutUtil.UpdateAsync(layout);
                 }
 
-                await this._fileUtil.WriteFile(layout.Title, "");
+                //await this._fileUtil.WriteFile(layout.Title);
             }
             catch (Exception ex)
             {

@@ -1,3 +1,4 @@
+using ComposerCMS.Core.Entity;
 using System;
 using System.IO;
 using System.Linq;
@@ -10,30 +11,23 @@ namespace ComposerCMS.Core.Utility
     {
         public const string HandleRequestsDirectlyFlag = "@page";
 
-        public async Task<string> WriteFile(string name, string content, bool isNavigatable = true)
+        public async Task WriteFile(Page page)
         {
-            string _path = string.Empty;
-            string _normalizedName = string.Join('-', name.Split(Constants.Environment.EmptySpace).Select(a => a.ToLower()));
+            string _normalizedName = string.Join('-', page.Name.Split(Constants.Environment.EmptySpace).Select(a => a.ToLower()));
 
-            if (isNavigatable)
+            if (string.IsNullOrEmpty(page.Path))
             {
-                _path = string.Format("pages/{0}.cshtml", _normalizedName);
-                content = string.Format("{0}{1}{2}", HandleRequestsDirectlyFlag, Environment.NewLine, content);
-            }
-            else
-            {
-                _path = string.Format("pages/_{0}.cshtml", _normalizedName);
+                page.Path = string.Format("pages/{0}.cshtml", _normalizedName);
+                page.Content = string.Format("{0}{1}{2}", HandleRequestsDirectlyFlag, Environment.NewLine, page.Content);
             }
 
-            using (FileStream fileStream = File.Open(_path, FileMode.Create))
+            using (FileStream fileStream = File.Open(page.Path, FileMode.Create))
             {
                 using (StreamWriter streamWriter = new StreamWriter(fileStream))
                 {
-                    await streamWriter.WriteLineAsync(content);
+                    await streamWriter.WriteLineAsync(page.Content);
                 }
             }
-
-            return _normalizedName;
         }
 
         public void Bundle()

@@ -16,6 +16,7 @@ import SureToastManager from '../../common/toast';
 export class DiffComponent implements OnInit {
   pageId: string;
   pageVersionId: string;
+  numbers: Array<number> = [];
 
   page: Page;
   pageVersion: PageVersion;
@@ -38,6 +39,8 @@ export class DiffComponent implements OnInit {
   previousOutput: Array<any> = [];
   currentOutput: Array<any> = [];
 
+  isLoaded: boolean = false;
+
   constructor(private _activatedRoute: ActivatedRoute, private _pageService: PageService, private _pageVersionService: PageVersionService) {
     this._activatedRoute.params.subscribe((params) => {
       this.pageId = params['pageId'];
@@ -56,37 +59,41 @@ export class DiffComponent implements OnInit {
   }
 
   ngOnInit() {
-    let toast = SureToastManager();
-    toast.showSuccess('test', {});
+    //let toast = SureToastManager();
+    //toast.showSuccess('test', {});
   }
 
   configureDiff(previousContent, currentContent) {
     let previousLines = previousContent.split('\n');
     let currentLines = currentContent.split('\n');
 
-    previousLines.forEach((line, originalIndex) => {
+    previousLines.forEach((line: string, originalIndex: number) => {
       if (originalIndex < currentLines.length - 1) {
-        let modifiedLineAtOriginalIndex = currentLines[originalIndex];
+        let modifiedLineAtOriginalIndex: string = currentLines[originalIndex];
 
-        if (modifiedLineAtOriginalIndex != line) {
+        if (modifiedLineAtOriginalIndex.trim() != line.trim()) {
           this.previousOutput.push({
             text: line,
+            lineNumberColor: '#FFDCE0',
             color: '#FFEEF0'
           });
 
           this.currentOutput.push({
             text: modifiedLineAtOriginalIndex,
+            lineNumberColor: '#CDFFD8',
             color: '#E6FFED'
           });
         }
         else {
           this.previousOutput.push({
             text: line,
+            lineNumberColor: '',
             color: ''
           });
 
           this.currentOutput.push({
             text: modifiedLineAtOriginalIndex,
+            lineNumberColor: '',
             color: ''
           });
         }
@@ -94,6 +101,7 @@ export class DiffComponent implements OnInit {
       else {
         this.previousOutput.push({
           text: line,
+          lineNumberColor: '#FFDCE0',
           color: '#FFEEF0'
         });
       }
@@ -102,11 +110,21 @@ export class DiffComponent implements OnInit {
     // Any new lines at the end of the modified lines we need to push to the output.
     if (previousLines.length < currentLines.length) {
       for (var i = previousLines.length; i < currentLines.length; i++) {
+        this.previousOutput.push({
+          text: '',
+          lineNumberColor: '#f9f9f9',
+          color: '#f9f9f9'
+        });
+
         this.currentOutput.push({
           text: currentLines[i],
+          lineNumberColor: '#CDFFD8',
           color: '#E6FFED'
         });
       }
     }
+
+    this.numbers = Array(this.currentOutput.length).fill(1).map((x, i) => i + 1);
+    this.isLoaded = true;
   }
 }
