@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ComposerCMS.Core.Migrations
 {
@@ -289,7 +290,7 @@ namespace ComposerCMS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -310,7 +311,7 @@ namespace ComposerCMS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -395,17 +396,17 @@ namespace ComposerCMS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "06172373-eb0f-4df7-813d-6e89c1110716", "Admin", "ADMIN" },
-                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "f9a566af-8052-41a8-ab39-aff9f567cf3f", "Editor", "EDITOR" },
-                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "52be4483-0aa3-4119-aced-2d5d6ac41e95", "Author", "AUTHOR" },
-                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "5193af90-d2b8-4f61-8f1c-04e421ca445b", "Contributor", "CONTRIBUTOR" },
-                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "0f975e51-00bc-40df-a136-16fab10577fb", "User", "USER" }
+                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "39a07760-467b-45a5-a10b-e8ad62ba7891", "Admin", "ADMIN" },
+                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "9e6ac746-7822-4e4e-b901-2ca2a399c82e", "Editor", "EDITOR" },
+                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "0253e128-d143-4847-80ad-87ed7741b80a", "Author", "AUTHOR" },
+                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "da7074dc-e93d-4c14-89d9-6a406d8f4df8", "Contributor", "CONTRIBUTOR" },
+                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "44541a68-843e-4ed6-bfc5-b095a294212b", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "f4a99174-c238-4b45-83a0-bdb3e29bcd21", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEMNHYYYpkH70K7JYD9XQ0u2aljikXuVVjCLVe861U6B7huTXhAdeDxKOholXFgt8tA==", null, false, "7c9563bf-c920-4a28-9081-dc8c1cfc02c4", false, "Admin" });
+                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "db77a034-0d81-48b2-b236-4f5fe8a786ce", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEOGx0PnjKOLI97oMyt2Mzr7dh0dnzLYezNqzTnCCOz173aT0/zOyVfI8mg91gMXjVg==", null, false, "3df9946f-18e9-4c48-9a04-fc2cdd2ee239", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -441,8 +442,7 @@ namespace ComposerCMS.Core.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -468,8 +468,7 @@ namespace ComposerCMS.Core.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Blog_Name",

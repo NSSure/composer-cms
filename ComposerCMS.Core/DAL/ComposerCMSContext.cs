@@ -42,7 +42,7 @@ namespace ComposerCMS.Core.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(Constants.Configuration.GetConnectionString("ComposerCMSContext"));
+            optionsBuilder.UseNpgsql(Constants.Configuration.GetConnectionString("ComposerCMSContext"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -178,6 +178,8 @@ namespace ComposerCMS.Core.DAL
                         });
 
                         context.SaveChanges();
+
+                        ComposerCMSApp.Settings = context.Settings.FirstOrDefault();
 
                         Menu _menu = new Menu()
                         {

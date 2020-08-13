@@ -40,7 +40,7 @@ namespace ComposerCMS.API
             // Services are all configured so now init the database.
             ComposerCMSContext.Initialize();
 
-            services.AddDbContext<ComposerCMSContext>(options => options.UseSqlServer(Constants.Configuration.GetConnectionString("ComposerCMSContext")));
+            services.AddDbContext<ComposerCMSContext>(options => options.UseNpgsql(Constants.Configuration.GetConnectionString("ComposerCMSContext")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ComposerCMSContext>().AddDefaultTokenProviders();
 
             services.AddSpaStaticFiles(configuration =>
