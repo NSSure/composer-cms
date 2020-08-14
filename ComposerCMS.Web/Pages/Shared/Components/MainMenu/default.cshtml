@@ -1,18 +1,20 @@
 @model ComposerCMS.Core.Model.MenuScaffold
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-    <a class="navbar-brand" href="/">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+<div class="nav nav-menu border-small mb-default is-shadowed fill-dark text-white">
+    <div class="nav-left">
+        <span class="nav-text">
+            @*<a href="#">Site Title</a>*@
+            <img src="http://bmgdigitaltech.com/images/BMG-Logo-Tiny-FFF.png" />
+        </span>
+    </div>
+    <div class="nav-right">
+        <ul class="nav-item">
             @foreach (ComposerCMS.Core.Model.MenuItemScaffold itemScaffold in this.Model.Items)
             {
-                <li class="nav-item">
-                    <a class="nav-link" href="@itemScaffold.Url">@itemScaffold.DisplayText</a>
+                <li>
+                    <a href="@itemScaffold.Url">@itemScaffold.DisplayText</a>
                 </li>
             }
         </ul>
     </div>
-</nav>
+</div>

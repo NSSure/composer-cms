@@ -25,9 +25,9 @@ namespace ComposerCMS.Core
         {
             public static string ContentDirectory = "composer-cms";
             public static string CssDirectory = $"{ContentDirectory}/css";
+            public static string ThemeDirectory = $"{ContentDirectory}/themes";
             public static string JsDirectory = $"{ContentDirectory}/js";
             public static string MediaDirectory = $"{ContentDirectory}/media";
-            public static string ThemeDirectory = $"{ContentDirectory}/themes";
         }
 
         public class Route

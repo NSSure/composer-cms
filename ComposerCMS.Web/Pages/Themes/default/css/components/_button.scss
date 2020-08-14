@@ -1,0 +1,20 @@
+.button {
+    background-color: $color-light;
+    padding: $padding-small;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.button-group {
+    display: flex;
+
+    .button {
+        margin-right: 10px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

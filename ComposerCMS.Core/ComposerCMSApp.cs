@@ -100,7 +100,7 @@ namespace ComposerCMS.Core
                 return HtmlString.Empty;
             }
 
-            string _href = $"/{Constants.Href.ThemeDirectory}/{_appliedTheme.Name}/theme.css";
+            string _href = $"/{Constants.Href.ThemeDirectory}/{_appliedTheme.Name}/css/theme.css";
 
             var node = new HTMLNode(HTMLTag.Link);
 

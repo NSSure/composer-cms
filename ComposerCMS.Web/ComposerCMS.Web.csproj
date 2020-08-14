@@ -9,10 +9,49 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Pages\Themes\dark\theme.css" />
-    <Content Include="Pages\Themes\dark\theme.scss" />
-    <Content Include="Pages\Themes\default\theme.css" />
-    <Content Include="Pages\Themes\default\theme.scss" />
+    <Content Include="Pages\Themes\dark\css\theme.scss" />
+    <Content Include="Pages\Themes\default\css\animations\_fade.scss" />
+    <Content Include="Pages\Themes\default\css\animations\_pulse.scss" />
+    <Content Include="Pages\Themes\default\css\animations\_rotate.scss" />
+    <Content Include="Pages\Themes\default\css\components\_button.scss" />
+    <Content Include="Pages\Themes\default\css\components\_card.scss" />
+    <Content Include="Pages\Themes\default\css\components\_code.scss" />
+    <Content Include="Pages\Themes\default\css\components\_color-swatch.scss" />
+    <Content Include="Pages\Themes\default\css\components\_form.scss" />
+    <Content Include="Pages\Themes\default\css\components\_label.scss" />
+    <Content Include="Pages\Themes\default\css\components\_modal.scss" />
+    <Content Include="Pages\Themes\default\css\components\_nav.scss" />
+    <Content Include="Pages\Themes\default\css\components\_pagination.scss" />
+    <Content Include="Pages\Themes\default\css\components\_table.scss" />
+    <Content Include="Pages\Themes\default\css\components\_tooltip.scss" />
+    <Content Include="Pages\Themes\default\css\dashboard\_content.scss" />
+    <Content Include="Pages\Themes\default\css\dashboard\_header.scss" />
+    <Content Include="Pages\Themes\default\css\dashboard\_sidebar.scss" />
+    <Content Include="Pages\Themes\default\css\dashboard\_structure.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_animation-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_button-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_color-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_layout-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_spacing-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_state-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\helpers\_typography-helpers.scss" />
+    <Content Include="Pages\Themes\default\css\main.scss" />
+    <Content Include="Pages\Themes\default\css\theme.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_animation-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_button-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_color-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_layout-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_spacing-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_state-variables.scss" />
+    <Content Include="Pages\Themes\default\css\variables\_typography-variables.scss" />
+    <Content Include="Pages\Themes\default\css\_animations.scss" />
+    <Content Include="Pages\Themes\default\css\_colors.scss" />
+    <Content Include="Pages\Themes\default\css\_components.scss" />
+    <Content Include="Pages\Themes\default\css\_dashboard.scss" />
+    <Content Include="Pages\Themes\default\css\_helpers.scss" />
+    <Content Include="Pages\Themes\default\css\_layout.scss" />
+    <Content Include="Pages\Themes\default\css\_typography.scss" />
+    <Content Include="Pages\Themes\default\css\_variables.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +81,7 @@
     <Folder Include="wwwroot\composer-cms\css\" />
     <Folder Include="wwwroot\composer-cms\js\" />
     <Folder Include="wwwroot\composer-cms\media\" />
+    <Folder Include="wwwroot\composer-cms\themes\" />
   </ItemGroup>
 
 </Project>
