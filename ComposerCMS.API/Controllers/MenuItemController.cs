@@ -55,8 +55,36 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                List<MenuItem> _menuItems = await this._menuItemUtil.Table.Where(a => a.MenuID == menuID.Value).ToListAsync();
+                List<MenuItem> _menuItems = await this._menuItemUtil.Table.Where(a => a.MenuID == menuID.Value).OrderBy(a => a.Order).ToListAsync();
                 return StatusCode(200, _menuItems);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("increment/order/{menuID}/{menuItemID}")]
+        public async Task<IActionResult> IncrementOrder([FromRoute] Guid menuID, [FromRoute] Guid menuItemID)
+        {
+            try
+            {
+                await this._menuItemUtil.IncrementOrder(menuID, menuItemID);
+                return StatusCode(200, true);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("decrement/order/{menuID}/{menuItemID}")]
+        public async Task<IActionResult> DecrementOrder([FromRoute] Guid menuID, [FromRoute] Guid menuItemID)
+        {
+            try
+            {
+                await this._menuItemUtil.DecrementOrder(menuID, menuItemID);
+                return StatusCode(200, true);
             }
             catch (Exception ex)
             {

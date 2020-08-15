@@ -6,6 +6,7 @@ namespace ComposerCMS.Core.Entity
     public class Page : IEntityTracking
     {
         public Guid ID { get; set; }
+        public Guid LayoutID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

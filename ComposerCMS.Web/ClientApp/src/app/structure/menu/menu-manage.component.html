@@ -22,6 +22,7 @@
 
     <input type="number" class="form-control mr-sm-2" id="Order" [(ngModel)]="menuItem.order" placeholder="Order">
 
+    <button type="button" class="btn btn-danger mr-2" (click)="isMenuItem = false">Cancel</button>
     <button type="button" class="btn btn-dark" (click)="saveMenuItem()">Save</button>
   </div>
 

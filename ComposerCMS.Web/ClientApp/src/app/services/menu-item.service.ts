@@ -19,7 +19,15 @@ export class MenuItemService {
     return this._http.post<MenuItem[]>(this.api.concat('update'), menuItem);
   }
 
-  list(menuId: number): Observable<MenuItem[]> {
+  list(menuId: string): Observable<MenuItem[]> {
     return this._http.post<MenuItem[]>(this.api.concat('list'), { value: menuId });
+  }
+
+  incrementOrder(menuId: string, menuItemId: string): Observable<boolean> {
+    return this._http.get<boolean>(this.api.concat(`increment/order/${menuId}/${menuItemId}`));
+  }
+
+  decrementOrder(menuId: string, menuItemId: string): Observable<boolean> {
+    return this._http.get<boolean>(this.api.concat(`decrement/order/${menuId}/${menuItemId}`));
   }
 }
