@@ -4,26 +4,75 @@
     ViewData["Title"] = "Blog";
 }
 
-<div class="container">
+<div class="container app-page">
     <h1>@this.Model.Blog.Name</h1>
     <p>@this.Model.Blog.Description</p>
 
-    <table class="table">
-        <thead>
+    <table class="table blog-posts is-rounded is-shadowed">
+        <thead class="fill-light">
             <tr>
-                <th colspan="3">Blog posts</th>
+                <th colspan="3">Pinned</th>
             </tr>
         </thead>
         <tbody>
-
-            @foreach (ComposerCMS.Core.Entity.Post post in this.Model.Posts)
+            @if (this.Model.PinnedPosts.Count > 0)
+            {
+                @foreach (ComposerCMS.Core.Entity.Post post in this.Model.PinnedPosts)
+                {
+                    <tr>
+                        <td>
+                            <a href="@this.Model.RouteMap[post.ID].Url">@post.Title</a>
+                        </td>
+                        <td>@post.Description</td>
+                        <td>@post.DateAdded</td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>
-                        <a href="@this.Model.RouteMap[post.ID].Url">@post.Title</a>
+                    <td colspan="3">
+                        <div class="empty-state">
+                            <span class="empty-state-title">Nothing to see here</span>
+                            <span class="empty-state-description">Try and check back here later for updated content.</span>
+                            <img class="empty-state-img" src="/composer-cms/media/sleeping.png" />
+                        </div>
                     </td>
-                    <td>@post.Description</td>
-                    <td>@post.DateAdded</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table class="table blog-posts is-rounded is-shadowed">
+        <thead class="fill-light">
+            <tr>
+                <th colspan="3">All my posts</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (this.Model.Posts.Count > 0)
+            {
+                @foreach (ComposerCMS.Core.Entity.Post post in this.Model.Posts)
+                {
+                    <tr>
+                        <td>
+                            <a href="@this.Model.RouteMap[post.ID].Url">@post.Title</a>
+                        </td>
+                        <td>@post.Description</td>
+                        <td>@post.DateAdded</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <div class="empty-state">
+                            <span class="empty-state-title">Nothing to see here</span>
+                            <span class="empty-state-description">Try and check back here later for updated content.</span>
+                            <img class="empty-state-img" src="/composer-cms/media/sleeping.png" />
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

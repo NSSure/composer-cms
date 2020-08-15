@@ -1,20 +1,25 @@
 @model ComposerCMS.Core.Model.MenuScaffold
 
-<div class="nav nav-menu border-small mb-default is-shadowed fill-dark text-white">
-    <div class="nav-left">
-        <span class="nav-text">
-            @*<a href="#">Site Title</a>*@
-            <img src="http://bmgdigitaltech.com/images/BMG-Logo-Tiny-FFF.png" />
-        </span>
-    </div>
-    <div class="nav-right">
-        <ul class="nav-item">
-            @foreach (ComposerCMS.Core.Model.MenuItemScaffold itemScaffold in this.Model.Items)
-            {
-                <li>
-                    <a href="@itemScaffold.Url">@itemScaffold.DisplayText</a>
-                </li>
-            }
-        </ul>
+<div class="fill-dark">
+    <div class="container-lg">
+        <div class="nav nav-menu is-shadowed fill-dark text-white">
+            <div class="nav-left">
+                <span class="nav-text">
+                    <a href="/">
+                        <img src="http://bmgdigitaltech.com/images/BMG-Logo-Tiny-FFF.png" />
+                    </a>
+                </span>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-item">
+                    @foreach (ComposerCMS.Core.Model.MenuItemScaffold itemScaffold in this.Model.Items)
+                    {
+                        <li>
+                            <a href="@itemScaffold.Url">@itemScaffold.DisplayText</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

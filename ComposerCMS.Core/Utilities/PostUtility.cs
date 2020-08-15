@@ -2,8 +2,11 @@
 using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Identity;
 using ComposerCMS.Core.Utility;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComposerCMS.Core.Utilities
@@ -65,6 +68,11 @@ namespace ComposerCMS.Core.Utilities
                     await transaction.RollbackAsync();
                 }
             }
+        }
+
+        public async Task<List<Post>> QueryReleasedPosts(Guid blogID)
+        {
+            return await this.Table.Where(a => a.BlogID == blogID && a.IsPublic && a.IsPublished).ToListAsync();
         }
     }
 }

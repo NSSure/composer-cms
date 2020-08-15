@@ -7,10 +7,52 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
     @ComposerCMSApp.ApplyThemeCss()
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rendered-content {
+            flex: 1;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer {
+            padding: 64px 32px;
+        }
+    </style>
 </head>
     
 <body>
     @await Component.InvokeAsync("MainMenu")
-    @RenderBody()
+
+    <div class="rendered-content">
+        @RenderBody()
+    </div>
+
+    <footer class="fill-dark text-white">
+        <div class="container-lg">
+            <div class="nav nav-list">
+                <ul class="nav-group">
+                    <li class="item-header">
+                        Header 1
+                    </li>
+                    <li>
+                        <a>
+                            Header 1
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            Header 2
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

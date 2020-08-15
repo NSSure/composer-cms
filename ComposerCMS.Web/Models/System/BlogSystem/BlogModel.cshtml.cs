@@ -21,6 +21,9 @@ namespace ComposerCMS.Web.Models.System.BlogSystem
         public Blog Blog { get; set; }
 
         [BindProperty]
+        public List<Post> PinnedPosts { get; set; }
+
+        [BindProperty]
         public List<Post> Posts { get; set; }
 
         [BindProperty]
@@ -40,10 +43,14 @@ namespace ComposerCMS.Web.Models.System.BlogSystem
             if (Guid.TryParse(this.HttpContext.Items["BlogID"].ToString(), out _blogID))
             {
                 this.Blog = await this._blogUtil.FirstOrDefaultAsync(a => a.ID == _blogID);
-                this.Posts = await this._postUtil.Table.Where(a => a.BlogID == _blogID).ToListAsync();
+
+                List<Post> _posts = await this._postUtil.QueryReleasedPosts(_blogID);
+
+                this.Posts = _posts.Where(a => !a.IsPinned).ToList();
+                this.PinnedPosts = _posts.Where(a => a.IsPinned).ToList();
 
                 // TODO: Fix this disaster.
-                List<string> _postEntityIDs = this.Posts.Select(a => a.ID.ToString()).ToList();
+                List<string> _postEntityIDs = _posts.Select(a => a.ID.ToString()).ToList();
                 var routes = await this._routeUtil.ToListAsync(a => _postEntityIDs.Contains(a.EntityID));
 
                 for (int i = 0; i < _postEntityIDs.Count; i++)
