@@ -174,6 +174,7 @@ namespace ComposerCMS.Core.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
+                    LayoutID = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
@@ -396,17 +397,17 @@ namespace ComposerCMS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "39a07760-467b-45a5-a10b-e8ad62ba7891", "Admin", "ADMIN" },
-                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "9e6ac746-7822-4e4e-b901-2ca2a399c82e", "Editor", "EDITOR" },
-                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "0253e128-d143-4847-80ad-87ed7741b80a", "Author", "AUTHOR" },
-                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "da7074dc-e93d-4c14-89d9-6a406d8f4df8", "Contributor", "CONTRIBUTOR" },
-                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "44541a68-843e-4ed6-bfc5-b095a294212b", "User", "USER" }
+                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "1379d2eb-ed59-4bb5-b868-88a67d0cb9a2", "Admin", "ADMIN" },
+                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "0f993fae-cc79-4150-8f03-bd6a88706093", "Editor", "EDITOR" },
+                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "8a9f8cbd-9b6e-4154-b74d-40fd6d15cc66", "Author", "AUTHOR" },
+                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "1c3f7f7a-7290-4569-88ae-566494c4ce43", "Contributor", "CONTRIBUTOR" },
+                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "954e96f5-460b-4f1c-9c59-cfc60dc2ba41", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "db77a034-0d81-48b2-b236-4f5fe8a786ce", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEOGx0PnjKOLI97oMyt2Mzr7dh0dnzLYezNqzTnCCOz173aT0/zOyVfI8mg91gMXjVg==", null, false, "3df9946f-18e9-4c48-9a04-fc2cdd2ee239", false, "Admin" });
+                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "94932462-7815-4bae-804d-6bb4c9ea6a19", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEAx4YHIq0OhemLJMaqOlkSzjs2UA14L7pVtYCRlvPVB4bK9X8EYwObAcpwFUN4Iptg==", null, false, "047a57f7-c5a8-4649-aa2d-d82159529487", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

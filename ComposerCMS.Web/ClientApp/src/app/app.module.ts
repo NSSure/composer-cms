@@ -34,6 +34,7 @@ import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { AuthInterceptor } from './interceptors/auth.intercecptor';
 import { ThemeListComponent } from './structure/theme/theme-list.component';
 
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -101,7 +102,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
-    )
+    ),
+    CodemirrorModule
   ],
   providers: [
     AccountService,

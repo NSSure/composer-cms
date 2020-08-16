@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ComposerCMS.Core.Migrations
 {
     [DbContext(typeof(ComposerCMSContext))]
-    [Migration("20200813011019_DatabaseV1")]
+    [Migration("20200816041052_DatabaseV1")]
     partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,6 +281,9 @@ namespace ComposerCMS.Core.Migrations
                     b.Property<bool>("IsSystemPage")
                         .HasColumnType("boolean");
 
+                    b.Property<Guid>("LayoutID")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -525,35 +528,35 @@ namespace ComposerCMS.Core.Migrations
                         new
                         {
                             Id = "993ab932-df4d-47ba-902f-2ec313dc4e73",
-                            ConcurrencyStamp = "39a07760-467b-45a5-a10b-e8ad62ba7891",
+                            ConcurrencyStamp = "1379d2eb-ed59-4bb5-b868-88a67d0cb9a2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4d323c3f-d805-4932-bb1e-02cc2d0f58b5",
-                            ConcurrencyStamp = "9e6ac746-7822-4e4e-b901-2ca2a399c82e",
+                            ConcurrencyStamp = "0f993fae-cc79-4150-8f03-bd6a88706093",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed",
-                            ConcurrencyStamp = "0253e128-d143-4847-80ad-87ed7741b80a",
+                            ConcurrencyStamp = "8a9f8cbd-9b6e-4154-b74d-40fd6d15cc66",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
                             Id = "a7f52a41-4c4c-45e0-9088-a89cb25dea92",
-                            ConcurrencyStamp = "da7074dc-e93d-4c14-89d9-6a406d8f4df8",
+                            ConcurrencyStamp = "1c3f7f7a-7290-4569-88ae-566494c4ce43",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
                             Id = "e3c7b0e0-88f7-4bd0-b846-66c63db1f614",
-                            ConcurrencyStamp = "44541a68-843e-4ed6-bfc5-b095a294212b",
+                            ConcurrencyStamp = "954e96f5-460b-4f1c-9c59-cfc60dc2ba41",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -651,13 +654,13 @@ namespace ComposerCMS.Core.Migrations
                         {
                             Id = "de0fa044-1d5b-44d7-a93e-66598b2b7c84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db77a034-0d81-48b2-b236-4f5fe8a786ce",
+                            ConcurrencyStamp = "94932462-7815-4bae-804d-6bb4c9ea6a19",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOGx0PnjKOLI97oMyt2Mzr7dh0dnzLYezNqzTnCCOz173aT0/zOyVfI8mg91gMXjVg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAx4YHIq0OhemLJMaqOlkSzjs2UA14L7pVtYCRlvPVB4bK9X8EYwObAcpwFUN4Iptg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3df9946f-18e9-4c48-9a04-fc2cdd2ee239",
+                            SecurityStamp = "047a57f7-c5a8-4649-aa2d-d82159529487",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

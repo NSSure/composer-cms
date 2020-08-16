@@ -40,7 +40,13 @@
       </div>
 
       <label>Page Markup</label>
-      <app-html-editor #htmlEditor [(content)]="page.content"></app-html-editor>
+      <ngx-codemirror [(ngModel)]="page.content"
+                      [options]="{
+    lineNumbers: true,
+    theme: 'material',
+    mode: 'markdown'
+  }"></ngx-codemirror>
+      <!--<app-html-editor #htmlEditor [(content)]="page.content"></app-html-editor>-->
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="card bg-light my-4">
