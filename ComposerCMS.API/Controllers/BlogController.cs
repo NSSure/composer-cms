@@ -5,6 +5,7 @@ using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ComposerCMS.Web.Controllers
 {
@@ -31,6 +32,35 @@ namespace ComposerCMS.Web.Controllers
             }
 
             return StatusCode(200, true);
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> Update([FromBody] Blog blog)
+        {
+            try
+            {
+                await this._blogUtil.ProcessExistingBlog(blog);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+            return StatusCode(200, true);
+        }
+
+        [HttpGet("get/{blogID}")]
+        public async Task<IActionResult> List([FromRoute] Guid blogID)
+        {
+            try
+            {
+                Blog _blog = await this._blogUtil.Table.Where(a => a.ID == blogID).FirstOrDefaultAsync();
+                return StatusCode(200, _blog);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("list")]

@@ -84,7 +84,7 @@ namespace ComposerCMS.Core.Utility
             if (!page.IsSystemPage)
             {
                 // Try and add the route if this is the first time being published.
-                _ = await this._routeUtil.TryAddRoute(page.ID, page.Title);
+                _ = await this._routeUtil.TryProcessRoute(page.ID, page.Title);
             }
         }
 

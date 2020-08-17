@@ -20,7 +20,7 @@ export class MenuManageComponent implements OnInit {
   routes: Route[] = [];
   isMenuItem: boolean = false;
 
-  @ViewChild(MenuItemListComponent, { static: false }) menuItemListComponent: MenuItemListComponent;
+  @ViewChild(MenuItemListComponent) menuItemListComponent: MenuItemListComponent;
 
   constructor(
     private _activatedRoute: ActivatedRoute,

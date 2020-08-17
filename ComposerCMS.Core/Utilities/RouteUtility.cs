@@ -14,22 +14,42 @@ namespace ComposerCMS.Core.Utility
 
         }
 
-        public async Task<bool> TryAddRoute<TEntityID>(TEntityID entityID, string originalEntityText, params string[] segments)
+        public async Task<bool> TryProcessRoute<TEntityID>(TEntityID entityID, string originalEntityText, params string[] segments)
         {
-            if (await this.Table.CountAsync(a => a.EntityID == entityID.ToString()) > 0)
-            {
-                return false;
-            }
-
             string _normalizedUrl = await this.NormalizeUrl(originalEntityText, segments);
 
-            await this.AddAsync(new Route()
+            Route _route = await this.Table.FirstOrDefaultAsync(a => a.EntityID == entityID.ToString());
+
+            if (_route == null && await this.Table.CountAsync(a => a.Url == _normalizedUrl) > 0)
             {
-                EntityID = entityID.ToString(),
-                Url = _normalizedUrl,
-                OriginalEntityText = originalEntityText,
-                DateAdded = DateTime.UtcNow
-            });
+                throw new Exception("Route already exists for the given url.");
+            }
+
+            Route _routeMatch = await this.Table.FirstOrDefaultAsync(a => a.Url == _normalizedUrl);
+
+            if (_routeMatch != null && _routeMatch.EntityID != entityID.ToString())
+            {
+                throw new Exception("Route already exists for the given url under a different entity.");
+            }
+
+            if (_route != null)
+            {
+                if (_route.Url != _normalizedUrl)
+                {
+                    _route.Url = _normalizedUrl;
+                }
+                
+                await this.UpdateAsync(_route);
+            }
+            else
+            {
+                await this.AddAsync(new Route()
+                {
+                    EntityID = entityID.ToString(),
+                    Url = _normalizedUrl,
+                    OriginalEntityText = originalEntityText
+                });
+            }
 
             return true;
         }

@@ -15,6 +15,14 @@ export class BlogService {
     return this._http.post(this.api.concat('add'), blog);
   }
 
+  update(blog: Blog) {
+    return this._http.post(this.api.concat('update'), blog);
+  }
+
+  get(blogId: string): Observable<Blog> {
+    return this._http.get<Blog>(this.api.concat(`get/${blogId}`));
+  }
+
   list(): Observable<Blog[]> {
     return this._http.get<Blog[]>(this.api.concat('list'))
   }

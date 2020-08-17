@@ -1,5 +1,5 @@
 <div class="card shadow-sm">
-  <table class="table table-striped table-centered mb-0">
+  <table class="table table-centered mb-0">
     <thead class="thead-light">
       <tr>
         <th>Friendly Name</th>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let theme of themes">
+      <tr *ngFor="let theme of themes" [ngClass]="{'fill-success': isThemeApplied(theme.key)}">
         <td>{{theme.friendlyName}}</td>
         <td>{{theme.description}}</td>
         <td>{{theme.author}}</td>

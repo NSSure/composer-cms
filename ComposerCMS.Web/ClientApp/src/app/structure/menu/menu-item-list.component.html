@@ -1,24 +1,26 @@
-<table class="table table-striped table-centered">
-  <thead class="thead-light">
-    <tr>
-      <th></th>
-      <th>Display Text</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let menuItem of menuItems; let i = index;">
-      <td>
-        <div class="d-flex flex-column text-primary">
-          <i class="fa fa-caret-up fa-lg" (click)="decrementOrder(menuItem, i)"></i>
-          <i class="fa fa-caret-down fa-lg" (click)="incrementOrder(menuItem, i)"></i>
-        </div>
-      </td>
-      <td>{{menuItem.displayText}}</td>
-    </tr>
-    <tr *ngIf="menuItems.length === 0">
-      <td colspan="7">
-        There are no menu items to display.
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="card shadow-sm">
+  <table class="table table-centered mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th></th>
+        <th>Display Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let menuItem of menuItems; let i = index;">
+        <td>
+          <div class="d-flex flex-column text-primary">
+            <i class="fa fa-caret-up fa-lg" (click)="decrementOrder(menuItem, i)"></i>
+            <i class="fa fa-caret-down fa-lg" (click)="incrementOrder(menuItem, i)"></i>
+          </div>
+        </td>
+        <td>{{menuItem.displayText}}</td>
+      </tr>
+      <tr *ngIf="menuItems.length === 0">
+        <td colspan="7">
+          There are no menu items to display.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

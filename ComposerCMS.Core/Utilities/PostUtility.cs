@@ -32,7 +32,7 @@ namespace ComposerCMS.Core.Utilities
                     await this.AddAsync(post);
 
                     Route _route = await this._routeUtil.FirstOrDefaultAsync(a => a.EntityID == post.BlogID.ToString());
-                    await this._routeUtil.TryAddRoute(post.ID, post.Title, _route.Url);
+                    await this._routeUtil.TryProcessRoute(post.ID, post.Title, _route.Url);
 
                     await transaction.CommitAsync();
                 }
