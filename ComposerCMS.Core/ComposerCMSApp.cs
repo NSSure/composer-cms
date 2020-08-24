@@ -3,7 +3,6 @@ using CMSSure.Builder.Models;
 using CMSSure.Builder.Utilities;
 using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Model;
-using ComposerCMS.Core.Utility;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
@@ -64,6 +63,7 @@ namespace ComposerCMS.Core
         public static void Init()
         {
             ComposerCMSApp.EnsureContentDirectories();
+            ComposerCMSApp.EnsureExternalResourceDirectories();
             ComposerCMSApp.LoadConfiguration();
         }
 
@@ -88,6 +88,19 @@ namespace ComposerCMS.Core
             if (!Directory.Exists(Constants.Path.MediaDirectory))
             {
                 Directory.CreateDirectory(Constants.Path.MediaDirectory);
+            }
+        }
+
+        public static void EnsureExternalResourceDirectories()
+        {
+            if (!Directory.Exists(Path.Combine("wwwroot", "css")))
+            {
+                Directory.CreateDirectory(Path.Combine("wwwroot", "css"));
+            }
+
+            if (!Directory.Exists(Path.Combine("wwwroot", "js")))
+            {
+                Directory.CreateDirectory(Path.Combine("wwwroot", "js"));
             }
         }
 

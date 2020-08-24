@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ComposerCMS.Core.Utility
 {
-    public class PageScriptUtility : BaseRepository<PageScript>
+    public class PageResourceUtility : BaseRepository<PageResource>
     {
         private readonly ExternalResourceUtility _externalResourceUtil;
 
-        public PageScriptUtility(ExternalResourceUtility externalResourceUtil, UserResolver userResolver) : base(userResolver)
+        public PageResourceUtility(ExternalResourceUtility externalResourceUtil, UserResolver userResolver) : base(userResolver)
         {
             this._externalResourceUtil = externalResourceUtil;
         }

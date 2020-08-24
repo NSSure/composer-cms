@@ -1,4 +1,7 @@
+using CMSSure.Builder.Enums;
+using CMSSure.Builder.Models;
 using ComposerCMS.Core.Entity;
+using ComposerCMS.Core.Entity.Structure;
 using ComposerCMS.Core.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
@@ -13,15 +16,18 @@ namespace ComposerCMS.Core.Utility
     public class PageUtility : BaseRepository<Page>
     {
         private readonly FileUtility _fileUtil;
-        private readonly PageScriptUtility _pageScriptUtil;
+        private readonly PageResourceUtility _pageResourceUtil;
+        private readonly PageResourcePackageUtility _pageResourcePackageUtil;
         private readonly ExternalResourceUtility _externalResourceUtil;
         private readonly SettingsUtility _settingsUtil;
         private readonly PageVersionUtility _pageVersionUtil;
         private readonly RouteUtility _routeUtil;
+        private readonly UserResolver _userResolver;
 
         public PageUtility(
             FileUtility fileUtil,
-            PageScriptUtility pageScriptUtil,
+            PageResourceUtility pageResourceUtil,
+            PageResourcePackageUtility pageResourcePackageUtil,
             ExternalResourceUtility externalResourceUtil,
             SettingsUtility settingsUtil,
             PageVersionUtility pageVersionUtil,
@@ -29,11 +35,13 @@ namespace ComposerCMS.Core.Utility
             UserResolver userResolver) : base(userResolver)
         {
             this._fileUtil = fileUtil;
-            this._pageScriptUtil = pageScriptUtil;
+            this._pageResourceUtil = pageResourceUtil;
+            this._pageResourcePackageUtil = pageResourcePackageUtil;
             this._externalResourceUtil = externalResourceUtil;
             this._settingsUtil = settingsUtil;
             this._pageVersionUtil = pageVersionUtil;
             this._routeUtil = routeUtil;
+            this._userResolver = userResolver;
         }
 
         public async Task ProcessExitingPage(Page page, bool isPublished = false)
@@ -59,9 +67,24 @@ namespace ComposerCMS.Core.Utility
                 throw new Exception("Please save your draft before publishing.");
             }
 
+            StringBuilder _contentBuilder = new StringBuilder(page.Content);
+
             // Append any resources to the page content.
-            string _resources = await this.ProcessScripts(page);
-            page.Content += $"{Environment.NewLine}{_resources}";
+            Dictionary<HTMLTag, string> _includesMap = await this.GenerateResourcesMap(page.ID);
+
+            foreach (KeyValuePair<HTMLTag, string> includeMap in _includesMap)
+            {
+                if (includeMap.Key == HTMLTag.Script)
+                {
+                    _contentBuilder.Insert(0, includeMap.Value);
+                }
+                else
+                {
+                    _contentBuilder.AppendLine(includeMap.Value);
+                }
+            }
+
+            page.Content = _contentBuilder.ToString();
 
             // Write the file with a normalized name to the pages folder.
             await this._fileUtil.WriteFile(page);
@@ -88,32 +111,51 @@ namespace ComposerCMS.Core.Utility
             }
         }
 
-        private async Task<string> ProcessScripts(Page page)
+        private async Task<Dictionary<HTMLTag, string>> GenerateResourcesMap(Guid pageID)
         {
-            List<PageScript> _pageScripts = this._pageScriptUtil.Table.Where(a => a.PageID == page.ID).OrderBy(a => a.LoadOrder).ToList();
+            StringBuilder _scriptsBuilder = new StringBuilder();
+            StringBuilder _stylesBuilder = new StringBuilder();
 
-            if (_pageScripts.Count > 0)
+            List<PagePackage> _pagePackages = this._pageResourcePackageUtil.Table.Where(a => a.PageID == pageID).OrderBy(a => a.Order).ToList();
+
+            if (_pagePackages.Count > 0)
             {
-                Settings _settings = await this._settingsUtil.GetCurrent();
+                ExternalPackageUtility _packageUtil = new ExternalPackageUtility(this._externalResourceUtil, this._userResolver);
 
-                StringBuilder _s = new StringBuilder();
-
-                List<Guid> _externalResourceIDs = _pageScripts.Select(a => a.ExternalResourceID).ToList();
-                List<ExternalResource> _scriptResources = await this._externalResourceUtil.Table.Where(a => _externalResourceIDs.Contains(a.ID)).ToListAsync();
-
-                _s.AppendLine("@section Scripts {");
-
-                foreach (ExternalResource resource in _scriptResources)
+                foreach (PagePackage package in _pagePackages)
                 {
-                    _s.AppendLine(string.Format("<link href=\"{0}\" rel=\"{1}\" />", resource.Href, "stylesheet"));
+                    var _includeMap = await _packageUtil.GenerateResourceIncludes(package.ID);
+
+                    _scriptsBuilder.AppendLine(_includeMap[HTMLTag.Script].Compile());
+                    _stylesBuilder.AppendLine(_includeMap[HTMLTag.Link].Compile());
                 }
-
-                _s.AppendLine("}");
-
-                return _s.ToString();
             }
 
-            return string.Empty;
+            List<Guid> _scopedResourceIDs = this._pageResourceUtil.Table.Where(a => a.PageID == pageID).OrderBy(a => a.Order).Select(a => a.ExternalResourceID).ToList();
+            List<ExternalResource> _scopedResources = await this._externalResourceUtil.Table.Where(a => _scopedResourceIDs.Contains(a.ID)).ToListAsync();
+
+            if (_scopedResources.Count > 0)
+            {
+                foreach (ExternalResource externalResource in _scopedResources)
+                {
+                    HTMLNode _includeNode = this._externalResourceUtil.GenerateIncludeNode(externalResource);
+
+                    if (_includeNode.Tag == HTMLTag.Script)
+                    {
+                        _scriptsBuilder.AppendLine(_includeNode.Compile());
+                    }
+                    else
+                    {
+                        _stylesBuilder.AppendLine(_includeNode.Compile());
+                    }
+                }
+            }
+
+            return new Dictionary<HTMLTag, string>()
+            {
+                { HTMLTag.Script, _scriptsBuilder.ToString() },
+                { HTMLTag.Link, _stylesBuilder.ToString() },
+            };
         }
     }
 }

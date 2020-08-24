@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ComposerCMS.Core;
+using ComposerCMS.Core.Model;
 using ComposerCMS.Core.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace ComposerCMS.Web.Controllers
         }
 
         [HttpPost("upload"), DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload()
+        public async Task<IActionResult> Upload([FromBody] UploadParams uploadParams)
         {
             try
             {
@@ -32,15 +33,15 @@ namespace ComposerCMS.Web.Controllers
 
                 if (Constants.File.SupportedImageExtensions.Contains(_extension))
                 {
-                    await this._externalResourceUtil.ConvertMediaFileToExternalResource(file);
+                    await this._externalResourceUtil.ConvertMediaFileToExternalResource(file, uploadParams);
                 }
                 else if (_extension == ".js")
                 {
-                    await this._externalResourceUtil.ConvertJsFileToExternalResourcec(file);
+                    await this._externalResourceUtil.ConvertJsFileToExternalResourcec(file, uploadParams);
                 }
                 else if (_extension == ".css")
                 {
-                    await this._externalResourceUtil.ConvertCssFileToExternalResource(file);
+                    await this._externalResourceUtil.ConvertCssFileToExternalResource(file, uploadParams);
                 }
                 else
                 {

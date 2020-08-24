@@ -1,8 +1,12 @@
 export class ExternalResource {
-    id: string;
-    name: string;
-    href: string;
-    rel: string;
-    type: string;
-    fileID: string;
+  id: string;
+  externalResourcePackageId: string;
+  name: string;
+  extension: string;
+  path: string;
+  order: string;
+  dateAdded: Date;
+  dateLastUpdated: Date;
+  userIdAdded: string;
+  userIdUpdated: string;
 }

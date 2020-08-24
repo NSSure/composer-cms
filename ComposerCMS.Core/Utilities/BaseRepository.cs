@@ -36,11 +36,11 @@ namespace ComposerCMS.Core.Utility
             }
         }
 
-        private readonly UserResolver _userResolver;
+        public readonly UserResolver UserResolver;
 
         public BaseRepository(UserResolver userResolver)
         {
-            this._userResolver = userResolver;
+            this.UserResolver = userResolver;
         }
 
         public virtual async Task AddAsync(TEntity entity)
@@ -50,7 +50,7 @@ namespace ComposerCMS.Core.Utility
             _tracking.DateAdded = DateTime.UtcNow;
             _tracking.DateLastUpdated = DateTime.UtcNow;
 
-            Guid _currentUserID = await this._userResolver.GetCurrentUserIDAsync();
+            Guid _currentUserID = await this.UserResolver.GetCurrentUserIDAsync();
 
             _tracking.UserIDAdded = _currentUserID;
             _tracking.UserIDLastUpdated = _currentUserID;
@@ -74,7 +74,7 @@ namespace ComposerCMS.Core.Utility
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            Guid _currentUserID = await this._userResolver.GetCurrentUserIDAsync();
+            Guid _currentUserID = await this.UserResolver.GetCurrentUserIDAsync();
 
             IEntityTracking _tracking = (IEntityTracking)entity;
 

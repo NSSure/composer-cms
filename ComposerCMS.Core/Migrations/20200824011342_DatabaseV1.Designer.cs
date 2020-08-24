@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ComposerCMS.Core.Migrations
 {
     [DbContext(typeof(ComposerCMSContext))]
-    [Migration("20200816041052_DatabaseV1")]
+    [Migration("20200824011342_DatabaseV1")]
     partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,32 @@ namespace ComposerCMS.Core.Migrations
                     b.ToTable("Blog");
                 });
 
+            modelBuilder.Entity("ComposerCMS.Core.Entity.ExternalPackage", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateLastUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserIDAdded")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserIDLastUpdated")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ExternalResourcePackage");
+                });
+
             modelBuilder.Entity("ComposerCMS.Core.Entity.ExternalResource", b =>
                 {
                     b.Property<Guid>("ID")
@@ -106,10 +132,16 @@ namespace ComposerCMS.Core.Migrations
                     b.Property<string>("Extension")
                         .HasColumnType("text");
 
-                    b.Property<string>("Href")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("ExternalPackageID")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Path")
                         .HasColumnType("text");
 
                     b.Property<Guid>("UserIDAdded")
@@ -313,7 +345,7 @@ namespace ComposerCMS.Core.Migrations
                     b.ToTable("Page");
                 });
 
-            modelBuilder.Entity("ComposerCMS.Core.Entity.PageScript", b =>
+            modelBuilder.Entity("ComposerCMS.Core.Entity.PageResource", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -328,7 +360,7 @@ namespace ComposerCMS.Core.Migrations
                     b.Property<Guid>("ExternalResourceID")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("LoadOrder")
+                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("PageID")
@@ -499,6 +531,38 @@ namespace ComposerCMS.Core.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("ComposerCMS.Core.Entity.Structure.PagePackage", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateLastUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("ExternalResourcePackageID")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("PageID")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserIDAdded")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserIDLastUpdated")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("PageResourcePackage");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -528,35 +592,35 @@ namespace ComposerCMS.Core.Migrations
                         new
                         {
                             Id = "993ab932-df4d-47ba-902f-2ec313dc4e73",
-                            ConcurrencyStamp = "1379d2eb-ed59-4bb5-b868-88a67d0cb9a2",
+                            ConcurrencyStamp = "ab55bc52-fa95-4d96-9dbc-d98a2219050c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4d323c3f-d805-4932-bb1e-02cc2d0f58b5",
-                            ConcurrencyStamp = "0f993fae-cc79-4150-8f03-bd6a88706093",
+                            ConcurrencyStamp = "327bb8b4-e8b4-4bba-88c2-bd311d61fdf4",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed",
-                            ConcurrencyStamp = "8a9f8cbd-9b6e-4154-b74d-40fd6d15cc66",
+                            ConcurrencyStamp = "a4987087-affb-46e7-9f6c-ea9e9dbec4d0",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
                             Id = "a7f52a41-4c4c-45e0-9088-a89cb25dea92",
-                            ConcurrencyStamp = "1c3f7f7a-7290-4569-88ae-566494c4ce43",
+                            ConcurrencyStamp = "a9a1c723-97fe-4ae0-9cc5-40a920009ff2",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
                             Id = "e3c7b0e0-88f7-4bd0-b846-66c63db1f614",
-                            ConcurrencyStamp = "954e96f5-460b-4f1c-9c59-cfc60dc2ba41",
+                            ConcurrencyStamp = "9c3ef1e9-f5a6-4f13-bcd1-b49e66ea3931",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -654,13 +718,13 @@ namespace ComposerCMS.Core.Migrations
                         {
                             Id = "de0fa044-1d5b-44d7-a93e-66598b2b7c84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94932462-7815-4bae-804d-6bb4c9ea6a19",
+                            ConcurrencyStamp = "630c07cd-478a-413b-897a-6d2be773344f",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAx4YHIq0OhemLJMaqOlkSzjs2UA14L7pVtYCRlvPVB4bK9X8EYwObAcpwFUN4Iptg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJcsNuVfjvlwedRGAgnSsuxrSXisE4vUPYrQ0VM9zLpD5GR6HAL/+s/TvrKutgD0rQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "047a57f7-c5a8-4649-aa2d-d82159529487",
+                            SecurityStamp = "9891c8e7-0108-4852-8689-0c1f91e18724",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

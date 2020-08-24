@@ -9,17 +9,17 @@ using System.Collections.Generic;
 namespace ComposerCMS.Web.Controllers
 {
     [Route("api/page/script")]
-    public class PageScriptController : Controller
+    public class PageResourceController : Controller
     {
-        private readonly PageScriptUtility _pageScriptUtil;
+        private readonly PageResourceUtility _pageScriptUtil;
 
-        public PageScriptController(PageScriptUtility pageScriptUtil)
+        public PageResourceController(PageResourceUtility pageScriptUtil)
         {
             this._pageScriptUtil = pageScriptUtil;
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> Add([FromBody] PageScript pageScript)
+        public async Task<IActionResult> Add([FromBody] PageResource pageScript)
         {
             try
             {

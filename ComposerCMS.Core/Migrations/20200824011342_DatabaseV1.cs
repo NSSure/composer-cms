@@ -85,9 +85,11 @@ namespace ComposerCMS.Core.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
+                    ExternalPackageID = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Extension = table.Column<string>(nullable: true),
-                    Href = table.Column<string>(nullable: true),
+                    Path = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateLastUpdated = table.Column<DateTime>(nullable: false),
                     UserIDAdded = table.Column<Guid>(nullable: false),
@@ -96,6 +98,22 @@ namespace ComposerCMS.Core.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExternalResource", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExternalResourcePackage",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    DateLastUpdated = table.Column<DateTime>(nullable: false),
+                    UserIDAdded = table.Column<Guid>(nullable: false),
+                    UserIDLastUpdated = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExternalResourcePackage", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,13 +213,31 @@ namespace ComposerCMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PageResourcePackage",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    PageID = table.Column<Guid>(nullable: false),
+                    ExternalResourcePackageID = table.Column<Guid>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    DateLastUpdated = table.Column<DateTime>(nullable: false),
+                    UserIDAdded = table.Column<Guid>(nullable: false),
+                    UserIDLastUpdated = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PageResourcePackage", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PageScript",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     PageID = table.Column<Guid>(nullable: false),
                     ExternalResourceID = table.Column<Guid>(nullable: false),
-                    LoadOrder = table.Column<int>(nullable: false),
+                    Order = table.Column<int>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateLastUpdated = table.Column<DateTime>(nullable: false),
                     UserIDAdded = table.Column<Guid>(nullable: false),
@@ -397,17 +433,17 @@ namespace ComposerCMS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "1379d2eb-ed59-4bb5-b868-88a67d0cb9a2", "Admin", "ADMIN" },
-                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "0f993fae-cc79-4150-8f03-bd6a88706093", "Editor", "EDITOR" },
-                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "8a9f8cbd-9b6e-4154-b74d-40fd6d15cc66", "Author", "AUTHOR" },
-                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "1c3f7f7a-7290-4569-88ae-566494c4ce43", "Contributor", "CONTRIBUTOR" },
-                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "954e96f5-460b-4f1c-9c59-cfc60dc2ba41", "User", "USER" }
+                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "ab55bc52-fa95-4d96-9dbc-d98a2219050c", "Admin", "ADMIN" },
+                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "327bb8b4-e8b4-4bba-88c2-bd311d61fdf4", "Editor", "EDITOR" },
+                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "a4987087-affb-46e7-9f6c-ea9e9dbec4d0", "Author", "AUTHOR" },
+                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "a9a1c723-97fe-4ae0-9cc5-40a920009ff2", "Contributor", "CONTRIBUTOR" },
+                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "9c3ef1e9-f5a6-4f13-bcd1-b49e66ea3931", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "94932462-7815-4bae-804d-6bb4c9ea6a19", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEAx4YHIq0OhemLJMaqOlkSzjs2UA14L7pVtYCRlvPVB4bK9X8EYwObAcpwFUN4Iptg==", null, false, "047a57f7-c5a8-4649-aa2d-d82159529487", false, "Admin" });
+                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "630c07cd-478a-413b-897a-6d2be773344f", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEJcsNuVfjvlwedRGAgnSsuxrSXisE4vUPYrQ0VM9zLpD5GR6HAL/+s/TvrKutgD0rQ==", null, false, "9891c8e7-0108-4852-8689-0c1f91e18724", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -574,6 +610,9 @@ namespace ComposerCMS.Core.Migrations
                 name: "ExternalResource");
 
             migrationBuilder.DropTable(
+                name: "ExternalResourcePackage");
+
+            migrationBuilder.DropTable(
                 name: "Layout");
 
             migrationBuilder.DropTable(
@@ -587,6 +626,9 @@ namespace ComposerCMS.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Page");
+
+            migrationBuilder.DropTable(
+                name: "PageResourcePackage");
 
             migrationBuilder.DropTable(
                 name: "PageScript");

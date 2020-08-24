@@ -7,6 +7,8 @@ namespace ComposerCMS.Core.Entity
     {
         public Guid ID { get; set; }
 
+        public Guid? ExternalPackageID { get; set; }
+
         /// <summary>
         /// File name
         /// </summary>
@@ -17,7 +19,9 @@ namespace ComposerCMS.Core.Entity
         /// <summary>
         /// wwwwroot/composer-cms/[css|js]
         /// </summary>
-        public string Href { get; set; }
+        public string Path { get; set; }
+
+        public int Order { get; set; }
 
         public DateTime DateAdded { get; set; }
         public DateTime DateLastUpdated { get; set; }

@@ -1,5 +1,6 @@
 using ComposerCMS.Core.DAL.Config;
 using ComposerCMS.Core.Entity;
+using ComposerCMS.Core.Entity.Structure;
 using ComposerCMS.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -26,12 +27,14 @@ namespace ComposerCMS.Core.DAL
         }
 
         public DbSet<ActivityHistory> ActivityHistory { get; set; }
+        public DbSet<ExternalPackage> ExternalResourcePackage { get; set; }
         public DbSet<ExternalResource> ExternalResource { get; set; }
         public DbSet<Layout> Layout { get; set; }
         public DbSet<LayoutScript> LayoutScript { get; set; }
         public DbSet<Page> Page { get; set; }
         public DbSet<PageVersion> PageVersion { get; set; }
-        public DbSet<PageScript> PageScript { get; set; }
+        public DbSet<PageResource> PageScript { get; set; }
+        public DbSet<PagePackage> PageResourcePackage { get; set; }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Post> Post { get; set; }
         public DbSet<Route> Route { get; set; }
@@ -48,6 +51,7 @@ namespace ComposerCMS.Core.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ActivityHistoryConfig());
+            modelBuilder.ApplyConfiguration(new ExternalPackageConfig());
             modelBuilder.ApplyConfiguration(new ExternalResourceConfig());
             modelBuilder.ApplyConfiguration(new LayoutConfig());
             modelBuilder.ApplyConfiguration(new LayoutScriptConfig());
@@ -55,7 +59,8 @@ namespace ComposerCMS.Core.DAL
             modelBuilder.ApplyConfiguration(new MenuItemConfig());
             modelBuilder.ApplyConfiguration(new PageConfig());
             modelBuilder.ApplyConfiguration(new PageVersionConfig());
-            modelBuilder.ApplyConfiguration(new PageScriptConfig());
+            modelBuilder.ApplyConfiguration(new PageResourceConfig());
+            modelBuilder.ApplyConfiguration(new PageResourcePackageConfig());
             modelBuilder.ApplyConfiguration(new BlogConfig());
             modelBuilder.ApplyConfiguration(new PostConfig());
             modelBuilder.ApplyConfiguration(new RouteConfig());

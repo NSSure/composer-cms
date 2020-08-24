@@ -142,9 +142,11 @@ namespace ComposerCMS.API
             services.AddTransient<MenuItemUtility>();
             services.AddTransient<PageUtility>();
             services.AddTransient<PageVersionUtility>();
-            services.AddTransient<PageScriptUtility>();
+            services.AddTransient<PageResourceUtility>();
+            services.AddTransient<PageResourcePackageUtility>();
             services.AddTransient<FileUtility>();
             services.AddTransient<ExternalResourceUtility>();
+            services.AddTransient<ExternalPackageUtility>();
             services.AddTransient<ActivityHistoryUtility>();
             services.AddTransient<SettingsUtility>();
             services.AddTransient<BlogUtility>();

@@ -29,7 +29,7 @@ export class ResourceListComponent implements OnInit {
   }
 
   viewResource(externalResource: ExternalResource) {
-    let url = externalResource.href.substr(1, externalResource.href.length);
+    let url = externalResource.path.substr(1, externalResource.path.length);
     window.open(`http://localhost:51494/${url}`)
   }
 }

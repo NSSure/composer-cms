@@ -1,13 +1,20 @@
-using System;
-using System.Text;
-using CMSSure.Builder.Enums;
-using CMSSure.Builder.Models;
+using System.Collections.Generic;
 using CMSSure.Builder.Utilities;
 
 namespace CMSSure.Builder.Models
 {
     public static class HTMLNodeExtensions
     {
+        public static string Compile(this HTMLNode node)
+        {
+            return NodeBuilder.Compile(node);
+        }
+
+        public static string Compile(this List<HTMLNode> nodes)
+        {
+            return NodeBuilder.Compile(nodes.ToArray());
+        }
+
         public static HTMLNode Add(this HTMLNode node, HTMLNode child)
         {
             node.Children.Add(child);

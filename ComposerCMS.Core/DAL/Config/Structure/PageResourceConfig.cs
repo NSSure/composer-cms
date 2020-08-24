@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ComposerCMS.Core.DAL.Config
 {
-    public class PageScriptConfig : IEntityTypeConfiguration<PageScript>
+    public class PageResourceConfig : IEntityTypeConfiguration<PageResource>
     {
-        public void Configure(EntityTypeBuilder<PageScript> builder)
+        public void Configure(EntityTypeBuilder<PageResource> builder)
         {
             builder.HasKey(p => p.ID);
 
             builder.Property(p => p.PageID);
             builder.Property(p => p.ExternalResourceID);
-            builder.Property(p => p.LoadOrder);
+            builder.Property(p => p.Order);
             builder.Property(p => p.DateAdded);
             builder.Property(p => p.DateLastUpdated);
             builder.Property(p => p.UserIDAdded);

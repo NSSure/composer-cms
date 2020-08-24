@@ -80,6 +80,7 @@
     <Folder Include="Models\Shared\" />
     <Folder Include="wwwroot\composer-cms\css\" />
     <Folder Include="wwwroot\composer-cms\js\" />
+    <Folder Include="wwwroot\composer-cms\resources\" />
     <Folder Include="wwwroot\composer-cms\themes\" />
   </ItemGroup>
 
