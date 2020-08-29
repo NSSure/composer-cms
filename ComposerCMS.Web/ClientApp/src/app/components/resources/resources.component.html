@@ -18,7 +18,7 @@
           <input [disabled]="progress > 0 && progress < 100" #fileInput multiple type="file" class="form-control-file" />
         </div>
         <div>
-          <button type="button" class="btn btn-dark mr-2" (click)="uploadPackage()">Upload package</button>
+          <button type="button" class="btn btn-dark mr-2" (click)="uploadPackage(fileInput.files)">Upload package</button>
           <button type="button" class="btn btn-danger" (click)="isAddingPackageBundle = false">Cancel</button>
         </div>
       </div>

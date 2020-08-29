@@ -1,11 +1,7 @@
 using System;
-using System.IO;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using ComposerCMS.Core;
 using ComposerCMS.Core.Model;
 using ComposerCMS.Core.Utility;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComposerCMS.Web.Controllers
@@ -27,26 +23,7 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                IFormFile file = Request.Form.Files[0];
-
-                string _extension = Path.GetExtension(file.FileName);
-
-                if (Constants.File.SupportedImageExtensions.Contains(_extension))
-                {
-                    await this._externalResourceUtil.ConvertMediaFileToExternalResource(file, uploadParams);
-                }
-                else if (_extension == ".js")
-                {
-                    await this._externalResourceUtil.ConvertJsFileToExternalResourcec(file, uploadParams);
-                }
-                else if (_extension == ".css")
-                {
-                    await this._externalResourceUtil.ConvertCssFileToExternalResource(file, uploadParams);
-                }
-                else
-                {
-                    throw new Exception("Unsupported file type uploaded.");
-                }
+                await this._externalResourceUtil.ConvertFileToStandaloneResource(Request.Form.Files[0]);
             }
             catch (Exception ex)
             {

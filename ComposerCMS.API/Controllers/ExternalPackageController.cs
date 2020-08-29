@@ -24,6 +24,10 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
+                var file = Request.Form.Files[0];
+
+                await this._externalPackageUtil.UploadLocalPackage(Request.Form.Files, string.Empty);
+
                 var _t = await this._externalPackageUtil.Table.ToListAsync();
 
                 List<PackageBundle> _models = new List<PackageBundle>();

@@ -42,7 +42,47 @@ namespace ComposerCMS.Core.Utility
             return _node;
         }
 
-        public async Task ConvertCssFileToExternalResource(IFormFile formFile, UploadParams uploadParams)
+        public async Task ConvertFileToPackageResource(IFormFile formFile, string packageName)
+        {
+            FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.PackageDirectory, formFile);
+
+            ExternalResource externalResource = new ExternalResource();
+
+            externalResource.Name = _fileInfo.Name;
+            externalResource.Extension = _fileInfo.Extension;
+            externalResource.Path = $"~/{Constants.Path.PackageDirectory}/{packageName}";
+
+            await this.AddAsync(externalResource);
+        }
+
+        /// <summary>
+        /// Add standalone external resources that are not apart of any package.
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
+        public async Task ConvertFileToStandaloneResource(IFormFile formFile)
+        {
+            string _extension = Path.GetExtension(formFile.FileName);
+
+            if (Constants.File.SupportedImageExtensions.Contains(_extension))
+            {
+                await this.ConvertMediaFileToStandaloneResource(formFile);
+            }
+            else if (_extension == ".js")
+            {
+                await this.ConvertJsFileToStandaloneResource(formFile);
+            }
+            else if (_extension == ".css")
+            {
+                await this.ConvertCssFileToStandaloneResource(formFile);
+            }
+            else
+            {
+                throw new Exception("Unsupported file type uploaded.");
+            }
+        }
+
+        public async Task ConvertCssFileToStandaloneResource(IFormFile formFile)
         {
             FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.CssDirectory, formFile);
 
@@ -51,12 +91,11 @@ namespace ComposerCMS.Core.Utility
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
             externalResource.Path = $"~/composer-cms/css/{_fileInfo.Name}";
-            externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
 
             await this.AddAsync(externalResource);
         }
 
-        public async Task ConvertJsFileToExternalResourcec(IFormFile formFile, UploadParams uploadParams)
+        public async Task ConvertJsFileToStandaloneResource(IFormFile formFile)
         {
             FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.JsDirectory, formFile);
 
@@ -65,12 +104,11 @@ namespace ComposerCMS.Core.Utility
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
             externalResource.Path = $"~/composer-cms/js/{_fileInfo.Name}";
-            externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
 
             await this.AddAsync(externalResource);
         }
 
-        public async Task ConvertMediaFileToExternalResource(IFormFile formFile, UploadParams uploadParams)
+        public async Task ConvertMediaFileToStandaloneResource(IFormFile formFile)
         {
             FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.MediaDirectory, formFile);
 
@@ -79,11 +117,16 @@ namespace ComposerCMS.Core.Utility
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
             externalResource.Path = $"~/composer-cms/media/{_fileInfo.Name}";
-            externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
 
             await this.AddAsync(externalResource);
         }
 
+        /// <summary>
+        /// Writes the actual file represented by the external resource to the disk.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
         public async Task<FileInfo> WriteSourceFileToDisk(string path, IFormFile formFile)
         {
             using (FileStream fileStream = System.IO.File.Open(Path.Combine(path, formFile.Name), FileMode.Create))
