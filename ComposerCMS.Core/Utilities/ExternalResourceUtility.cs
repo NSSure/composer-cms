@@ -56,7 +56,7 @@ namespace ComposerCMS.Core.Utility
             await this.AddAsync(externalResource);
         }
 
-        public async Task ConvertJsFileToExternalResourcec(IFormFile formFile, Guid? packageID)
+        public async Task ConvertJsFileToExternalResourcec(IFormFile formFile, UploadParams uploadParams)
         {
             FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.JsDirectory, formFile);
 
@@ -65,12 +65,12 @@ namespace ComposerCMS.Core.Utility
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
             externalResource.Path = $"~/composer-cms/js/{_fileInfo.Name}";
-            externalResource.ExternalPackageID = packageID;
+            externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
 
             await this.AddAsync(externalResource);
         }
 
-        public async Task ConvertMediaFileToExternalResource(IFormFile formFile, Guid? packageID)
+        public async Task ConvertMediaFileToExternalResource(IFormFile formFile, UploadParams uploadParams)
         {
             FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.MediaDirectory, formFile);
 
@@ -79,7 +79,7 @@ namespace ComposerCMS.Core.Utility
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
             externalResource.Path = $"~/composer-cms/media/{_fileInfo.Name}";
-            externalResource.ExternalPackageID = packageID;
+            externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
 
             await this.AddAsync(externalResource);
         }

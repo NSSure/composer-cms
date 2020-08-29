@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ComposerCMS.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/external/resource")]
     public class ExternalResourceController : Controller
     {
         private readonly ExternalResourceUtility _externalResourceUtil;

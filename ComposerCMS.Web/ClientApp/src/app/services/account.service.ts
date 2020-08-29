@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 
-// Sample data import.
 import { BehaviorSubject } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { UserRegistration } from '../../models/UserRegistration';
-import { UserSignIn } from '../../models/UserSignIn';
-import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { BaseService } from './base.service';
+import { UserRegistration } from '../models/UserRegistration';
+import { UserSignIn } from '../models/UserSignIn';
 
 @Injectable()
-export class AccountService {
-  api = 'http://localhost:51494/api/account/';
+export class AccountService extends BaseService {
+  get api() {
+    return `${super.api}/api/account/`;
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
-
-  constructor(private _http: HttpClient, private _router: Router) { }
 
   private _isAuthenticatedSource = new BehaviorSubject<boolean>(!this.isTokenExpired);
 
@@ -60,19 +59,19 @@ export class AccountService {
   }
 
   register(userRegistration: UserRegistration) {
-    return this._http.post(this.api + 'register', userRegistration, this.httpOptions);
+    return this.http.post(this.api + 'register', userRegistration, this.httpOptions);
   }
 
   logout() {
-    this._http.get<string>(this.api + 'logout', this.httpOptions).subscribe((rtn) => {
+    this.http.get<string>(this.api + 'logout', this.httpOptions).subscribe((rtn) => {
       this.setIsAuthenticated(false);
       localStorage.removeItem('userToken');
-      this._router.navigate(['login']);
+      this.router.navigate(['login']);
     });
   }
 
   login(userSignIn: UserSignIn) {
-    this._http.post<string>(this.api + 'login', userSignIn, this.httpOptions).subscribe(token => {
+    this.http.post<string>(this.api + 'login', userSignIn, this.httpOptions).subscribe(token => {
       this.setIsAuthenticated(true);
       localStorage.setItem('userToken', JSON.stringify(token));
     });

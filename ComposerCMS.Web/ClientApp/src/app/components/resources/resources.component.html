@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-12 col-lg-6">
+    <p class="lead">Package Bundles <a class="cursor-pointer text-primary" (click)="isAddingPackageBundle = true">Add new package bundle</a></p>
+
+    <p>
+      Uploaded package bundles can be applied to a page or a layout. If you apply a package bundle to either a page or layout
+      all of the related scripts and styles will be applied.
+    </p>
+
+    <div class="card mb-4" *ngIf="isAddingPackageBundle">
+      <div class="card-body">
+        <div class="form-group">
+          <label>Package Name</label>
+          <input type="text" class="form-control" [(ngModel)]="packageName" placeholder="Enter you bundle name here." />
+        </div>
+        <div class="form-group">
+          <label>Upload package contents</label>
+          <input [disabled]="progress > 0 && progress < 100" #fileInput multiple type="file" class="form-control-file" />
+        </div>
+        <div>
+          <button type="button" class="btn btn-dark mr-2" (click)="uploadPackage()">Upload package</button>
+          <button type="button" class="btn btn-danger" (click)="isAddingPackageBundle = false">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion mb-4" id="accordionExample">
+      <div class="card" *ngFor="let packageBundle of packageBundles; let i = index;">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              {{packageBundle.name}} - {{packageBundle.packageResources.length}} item(s)
+            </button>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <input multiple type="file" class="form-control-file" />
+          <table class="table mb-0">
+            <tbody>
+              <tr *ngFor="let packageResource of packageBundle.packageResources">
+                <td>{{packageResource.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="lead">Standalone Resources</p>
+
+      <p>
+        Upload a standalone resource below. These resources can be applied individually to a page or layout without
+        going through a package bundle.
+      </p>
+
+      <div class="form-group">
+        <input multiple type="file" class="form-control-file" />
+      </div>
+
+      <app-resource-list></app-resource-list>
+    </div>
+  </div>
+</div>

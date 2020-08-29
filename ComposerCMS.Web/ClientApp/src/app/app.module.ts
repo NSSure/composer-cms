@@ -6,35 +6,34 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
-import { LoginComponent } from './login/login.component';
-import { SiteSettingsComponent } from './settings/site-settings.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResourcesComponent } from './resources/resources.component';
-import { FileUploadComponent } from './file/upload/file-upload.component';
-import { ResourceListComponent } from './resources/resource-list.component';
-import { HtmlEditorComponent } from './html-editor/html-editor.component';
-import { ActivityHistoryComponent } from './activity-history/activity-history.component';
-import { DiffComponent } from './diff/diff.component';
-import { PageListComponent } from './structure/page/page-list.component';
-import { PageManageComponent } from './structure/page/page-manage.component';
-import { LayoutListComponent } from './structure/layout-list.component';
-import { LayoutManageComponent } from './structure/layout-manage.component';
-import { SideMenuComponent } from './side-menu/side-menu.component';
-import { PageVersionListComponent } from './structure/page/version/page-version-list.component';
-import { MenuListComponent } from './structure/menu/menu-list.component';
-import { MenuManageComponent } from './structure/menu/menu-manage-component';
-import { BlogListComponent } from './blog/blog-list.component';
-import { BlogManageComponent } from './blog/blog-manage.component';
-import { PostManageComponent } from './post/post-manage.component';
-import { PostListComponent } from './post/post-list.component';
-import { ActiveStateIndicatorComponent } from './helpers/active-state-indicator.component';
-import { MenuItemListComponent } from './structure/menu/menu-item-list.component';
 import { AccountService } from './services/account.service';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { AuthInterceptor } from './interceptors/auth.intercecptor';
-import { ThemeListComponent } from './structure/theme/theme-list.component';
 
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { LoginComponent } from './components/login/login.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { PageListComponent } from './components/structure/page/page-list.component';
+import { PageManageComponent } from './components/structure/page/page-manage.component';
+import { PageVersionListComponent } from './components/structure/page/version/page-version-list.component';
+import { ActivityHistoryComponent } from './components/activity-history/activity-history.component';
+import { ThemeListComponent } from './components/structure/theme/theme-list.component';
+import { SiteSettingsComponent } from './components/settings/site-settings.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LayoutListComponent } from './components/structure/layout-list.component';
+import { LayoutManageComponent } from './components/structure/layout-manage.component';
+import { MenuListComponent } from './components/structure/menu/menu-list.component';
+import { MenuManageComponent } from './components/structure/menu/menu-manage-component';
+import { MenuItemListComponent } from './components/structure/menu/menu-item-list.component';
+import { ResourcesComponent } from './components/resources/resources.component';
+import { ResourceListComponent } from './components/resources/resource-list.component';
+import { HtmlEditorComponent } from './components/html-editor/html-editor.component';
+import { DiffComponent } from './components/diff/diff.component';
+import { BlogListComponent } from './components/blog/blog-list.component';
+import { BlogManageComponent } from './components/blog/blog-manage.component';
+import { PostListComponent } from './components/post/post-list.component';
+import { PostManageComponent } from './components/post/post-manage.component';
+import { ActiveStateIndicatorComponent } from './components/helpers/active-state-indicator.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -86,7 +85,6 @@ const appRoutes: Routes = [
     MenuItemListComponent,
     ResourcesComponent,
     ResourceListComponent,
-    FileUploadComponent,
     HtmlEditorComponent,
     DiffComponent,
     BlogListComponent,

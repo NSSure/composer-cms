@@ -50,7 +50,7 @@ namespace ComposerCMS.API
 
             services.AddCors((options) =>
             {
-                options.AddPolicy("CorsPolicy", (builder) =>
+                options.AddPolicy("AllowAll", (builder) =>
                 {
                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
@@ -166,7 +166,8 @@ namespace ComposerCMS.API
             app.UseAuthentication();
 
             app.UseStaticFiles();
-            app.UseCors(options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            app.UseCors("AllowAll");
+            //app.UseCors(options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
