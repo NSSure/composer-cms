@@ -1,28 +1,28 @@
-<div class="card bg-light mb-4">
-    <div class="card-body">
-        <form class="form-inline justify-content-between">
-
-            <button type="button" class="btn btn-primary" routerLink="/layout">Create New Layout</button>
-        </form>
-    </div>
-</div>
-
-<table class="table table-striped table-centered">
-    <thead class="thead-light">
+<app-page>
+  <div actions>
+    <button type="button" class="btn btn-primary" routerLink="/layout">Create New Layout</button>
+  </div>
+  <div content>
+    <table class="table table-striped table-centered">
+      <thead class="thead-light">
         <tr>
-            <th>Title</th>
+          <th>Title</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let layout of layouts">
-            <td>
-                {{layout.title}}
-            </td>
+          <td>
+            {{layout.title}}
+          </td>
         </tr>
         <tr *ngIf="layouts.length === 0">
-            <td colspan="2">
-                There are no layouts to display.
-            </td>
+          <td colspan="2">
+            There are no layouts to display.
+          </td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</app-page>
+
+

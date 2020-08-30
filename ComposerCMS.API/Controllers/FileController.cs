@@ -19,11 +19,11 @@ namespace ComposerCMS.Web.Controllers
         }
 
         [HttpPost("upload"), DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload([FromBody] UploadParams uploadParams)
+        public async Task<IActionResult> Upload()
         {
             try
             {
-                await this._externalResourceUtil.ConvertFileToStandaloneResource(Request.Form.Files[0]);
+                await this._externalResourceUtil.ConvertFilesToStandaloneResource(Request.Form.Files);
             }
             catch (Exception ex)
             {

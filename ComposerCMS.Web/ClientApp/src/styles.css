@@ -10,6 +10,20 @@ body {
   font-family: 'Roboto', sans-serif !important;
 }
 
+.header-input {
+  color: white;
+}
+
+.header-input:focus {
+    outline: 1px solid white;
+    box-shadow: none;
+    color: white;
+}
+
+  .header-input::placeholder {
+    color: white;
+  }
+
 .fill-danger {
   background-color: #F2DEDE;
 }
@@ -19,12 +33,12 @@ body {
 }
 
 .navbar {
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .navbar-brand {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .key-value {
@@ -92,9 +106,9 @@ body {
         padding: 15px;
       }
 
-      .side-menu ul .menu-item .menu-link.active {
-        background-color: #253744;
-      }
+        .side-menu ul .menu-item .menu-link.active {
+          background-color: #253744;
+        }
 
         .side-menu ul .menu-item .menu-link a {
           color: #ffffff;
@@ -357,4 +371,66 @@ body {
   to {
     width: 0;
   }
+}
+
+.bg-lang-css {
+  background-color: #563d7c;
+}
+
+.bg-lang-html {
+  background-color: #e44b23;
+}
+
+.bg-lang-js {
+  background-color: #f1e05a;
+}
+
+.badge {
+  font-size: 1rem;
+}
+
+.resource-grid {
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+@media only screen and (max-width: 976px) {
+  .resource-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.resource-item {
+  margin-bottom: 15px;
+}
+
+  .resource-item .resource-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 8px;
+  }
+
+    .resource-item .resource-preview img {
+      object-fit: contain;
+      justify-self: center;
+      align-self: center;
+      width: auto;
+      height: 100%;
+      max-height: 200px;
+    }
+
+  .resource-item .resource-name {
+    font-size: 12px;
+  }
+
+:host {
+  display: block
 }

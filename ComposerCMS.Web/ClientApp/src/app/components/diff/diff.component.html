@@ -37,75 +37,79 @@
   }
 </style>
 
-<div class="diff-component">
-  <div *ngIf="isLoaded">
-    <table class="shadow-sm mb-0">
-      <thead>
-        <tr>
-          <th class="version-header" scope="col" colspan="2">Previously Published Version - {{pageVersion.dateAdded | date: 'short'}}</th>
-          <th class="version-header" scope="col" colspan="2">Current Published Version - {{page.dateLastPublished | date: 'short'}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let number of numbers">
-          <td class="line-number" scope="row" [style.background-color]="previousOutput[number - 1].lineNumberColor">
-            {{number}}
-          </td>
-          <td class="line-content version-separator" [style.background-color]="previousOutput[number - 1].color">
-            {{previousOutput[number - 1].text}}
-          </td>
-          <td class="line-number" scope="row" [style.background-color]="currentOutput[number - 1].lineNumberColor">
-            {{number}}
-          </td>
-          <td class="line-content" [style.background-color]="currentOutput[number - 1].color">
-            {{currentOutput[number - 1].text}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<app-page>
+  <div content>
+    <div class="diff-component">
+      <div *ngIf="isLoaded">
+        <table class="shadow-sm mb-0">
+          <thead>
+            <tr>
+              <th class="version-header" scope="col" colspan="2">Previously Published Version - {{pageVersion.dateAdded | date: 'short'}}</th>
+              <th class="version-header" scope="col" colspan="2">Current Published Version - {{page.dateLastPublished | date: 'short'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let number of numbers">
+              <td class="line-number" scope="row" [style.background-color]="previousOutput[number - 1].lineNumberColor">
+                {{number}}
+              </td>
+              <td class="line-content version-separator" [style.background-color]="previousOutput[number - 1].color">
+                {{previousOutput[number - 1].text}}
+              </td>
+              <td class="line-number" scope="row" [style.background-color]="currentOutput[number - 1].lineNumberColor">
+                {{number}}
+              </td>
+              <td class="line-content" [style.background-color]="currentOutput[number - 1].color">
+                {{currentOutput[number - 1].text}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--<div class="row">
+      <div class="col">
+        <div *ngIf="page">
+          <div class="card shadow-sm">
+            <div class="card-header">
+              Previously Published Version - {{pageVersion.dateAdded | date: 'short'}}
+            </div>
+            <table>
+              <tbody>
+                <tr *ngFor="let item of previousOutput; let i = index;">
+                  <td class="line-number" [style.background-color]="item.lineNumberColor">
+                    {{i + 1}}
+                  </td>
+                  <td class="line-content" [style.background-color]="item.color">
+                    {{item.text}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div *ngIf="pageVersion">
+          <div class="card shadow-sm">
+            <div class="card-header">
+              Current Published Version - {{page.dateLastPublished | date: 'short'}}
+            </div>
+            <table>
+              <tbody>
+                <tr *ngFor="let item of currentOutput; let i = index;">
+                  <td class="line-number" [style.background-color]="item.lineNumberColor">
+                    {{i + 1}}
+                  </td>
+                  <td class="line-content" [style.background-color]="item.color">
+                    {{item.text}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    </div>
   </div>
-  <!--<div class="row">
-    <div class="col">
-      <div *ngIf="page">
-        <div class="card shadow-sm">
-          <div class="card-header">
-            Previously Published Version - {{pageVersion.dateAdded | date: 'short'}}
-          </div>
-          <table>
-            <tbody>
-              <tr *ngFor="let item of previousOutput; let i = index;">
-                <td class="line-number" [style.background-color]="item.lineNumberColor">
-                  {{i + 1}}
-                </td>
-                <td class="line-content" [style.background-color]="item.color">
-                  {{item.text}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div *ngIf="pageVersion">
-        <div class="card shadow-sm">
-          <div class="card-header">
-            Current Published Version - {{page.dateLastPublished | date: 'short'}}
-          </div>
-          <table>
-            <tbody>
-              <tr *ngFor="let item of currentOutput; let i = index;">
-                <td class="line-number" [style.background-color]="item.lineNumberColor">
-                  {{i + 1}}
-                </td>
-                <td class="line-content" [style.background-color]="item.color">
-                  {{item.text}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>-->
-</div>
+</app-page>

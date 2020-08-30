@@ -1,23 +1,27 @@
-<div class="card shadow-sm activity-history-component">
-  <table class="table table-centered mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Entity</th>
-        <th>Action</th>
-        <th>Date Added</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let activity of activityHistory">
-        <td>{{activity.entity}}</td>
-        <td>{{activity.action}}</td>
-        <td>{{activity.dateAdded | date: 'short'}}</td>
-      </tr>
-      <tr *ngIf="activityHistory.length === 0">
-        <td colspan="3">
-          There is no activity history to display.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-page>
+  <div content>
+    <div class="card shadow-sm activity-history-component">
+      <table class="table table-centered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Entity</th>
+            <th>Action</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activity of activityHistory">
+            <td>{{activity.entity}}</td>
+            <td>{{activity.action}}</td>
+            <td>{{activity.dateAdded | date: 'short'}}</td>
+          </tr>
+          <tr *ngIf="activityHistory.length === 0">
+            <td colspan="3">
+              There is no activity history to display.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page>

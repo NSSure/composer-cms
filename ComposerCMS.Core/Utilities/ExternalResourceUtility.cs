@@ -2,10 +2,13 @@ using CMSSure.Builder.Enums;
 using CMSSure.Builder.Models;
 using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Identity;
-using ComposerCMS.Core.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
@@ -13,9 +16,52 @@ namespace ComposerCMS.Core.Utility
 {
     public class ExternalResourceUtility : BaseRepository<ExternalResource>
     {
-        public ExternalResourceUtility(UserResolver userResolver) : base(userResolver)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public ExternalResourceUtility(UserManager<IdentityUser> userManager, UserResolver userResolver) : base(userResolver)
         {
-  
+            this._userManager = userManager;
+        }
+
+        public class ExternalResourceModel : ExternalResource
+        {
+            /// <summary>
+            /// User who added the resource.
+            /// </summary>
+            public string UserName { get; set; }
+        }
+
+        public async Task<List<ExternalResourceModel>> ListStandaloneResourceModelsAsync()
+        {
+            List<ExternalResourceModel> _models = new List<ExternalResourceModel>();
+
+            List<ExternalResource> externalResources = await this.Table.Where(a => a.ExternalPackageID == null).ToListAsync();
+            List<string> _userIDs = externalResources.Select(a => a.UserIDAdded.ToString()).ToList();
+
+            List<IdentityUser> _users = await this._userManager.Users.Where(a => _userIDs.Contains(a.Id)).ToListAsync();
+
+            foreach (ExternalResource resource in externalResources)
+            {
+                ExternalResourceModel _model = new ExternalResourceModel()
+                {
+                    DateAdded = resource.DateAdded,
+                    DateLastUpdated = resource.DateLastUpdated,
+                    Extension = resource.Extension,
+                    ExternalPackageID = resource.ExternalPackageID,
+                    Name = resource.Name,
+                    Order = resource.Order,
+                    Path = resource.Path,
+                    ID = resource.ID,
+                    UserIDAdded = resource.ID,
+                    UserIDLastUpdated = resource.UserIDLastUpdated,
+                };
+
+                _model.UserName = _users.FirstOrDefault(a => a.Id == resource.UserIDAdded.ToString()).UserName;
+
+                _models.Add(_model);
+            }
+
+            return _models;
         }
 
         public HTMLNode GenerateIncludeNode(ExternalResource resource)
@@ -42,17 +88,33 @@ namespace ComposerCMS.Core.Utility
             return _node;
         }
 
-        public async Task ConvertFileToPackageResource(IFormFile formFile, string packageName)
+        public async Task ConvertFileToPackageResource(IFormFile formFile, ExternalPackage package)
         {
-            FileInfo _fileInfo = await this.WriteSourceFileToDisk(Constants.Path.PackageDirectory, formFile);
+            string _resourcePath = Path.Combine(Constants.Path.PackageDirectory, package.Name, formFile.Name);
+
+            if (!File.Exists(_resourcePath))
+            {
+                throw new Exception("Package resource already exists.");
+            }
+
+            FileInfo _fileInfo = await this.WriteSourceFileToDisk(_resourcePath, formFile);
 
             ExternalResource externalResource = new ExternalResource();
 
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
-            externalResource.Path = $"~/{Constants.Path.PackageDirectory}/{packageName}";
+            externalResource.Path = $"/{Constants.Href.PackageDirectory}/{package.Name.NormalizeForUrl()}";
+            externalResource.ExternalPackageID = package.ID;
 
             await this.AddAsync(externalResource);
+        }
+
+        public async Task ConvertFilesToStandaloneResource(IFormFileCollection formFiles)
+        {
+            foreach (IFormFile formFile in formFiles)
+            {
+                await this.ConvertFileToStandaloneResource(formFile);
+            }
         }
 
         /// <summary>
@@ -90,7 +152,7 @@ namespace ComposerCMS.Core.Utility
 
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
-            externalResource.Path = $"~/composer-cms/css/{_fileInfo.Name}";
+            externalResource.Path = $"/composer-cms/css/{_fileInfo.Name}";
 
             await this.AddAsync(externalResource);
         }
@@ -103,7 +165,7 @@ namespace ComposerCMS.Core.Utility
 
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
-            externalResource.Path = $"~/composer-cms/js/{_fileInfo.Name}";
+            externalResource.Path = $"/composer-cms/js/{_fileInfo.Name}";
 
             await this.AddAsync(externalResource);
         }
@@ -116,7 +178,7 @@ namespace ComposerCMS.Core.Utility
 
             externalResource.Name = _fileInfo.Name;
             externalResource.Extension = _fileInfo.Extension;
-            externalResource.Path = $"~/composer-cms/media/{_fileInfo.Name}";
+            externalResource.Path = $"/composer-cms/media/{_fileInfo.Name}";
 
             await this.AddAsync(externalResource);
         }

@@ -1,70 +1,69 @@
-<div class="card bg-light mb-4">
-  <div class="card-body">
-    <form class="form-inline justify-content-between">
-      <button type="button" class="btn btn-primary" routerLink="/page">Create New Page</button>
-    </form>
+<app-page>
+  <div actions>
+    <button type="button" class="btn btn-primary" routerLink="/page">Create New Page</button>
   </div>
-</div>
+  <div content>
+    <p class="lead">Custom Pages</p>
 
-<p class="lead">Custom Pages</p>
+    <div class="card shadow-sm mb-4">
+      <table class="table table-centered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Friendly Name</th>
+            <th>Published</th>
+            <th>Date Published</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let page of pages">
+            <td>
+              <a class="cursor-pointer" [routerLink]="['/page', page.id]">
+                {{page.name}}
+              </a>
+            </td>
+            <td>
+              <active-state-indicator [flag]="page.isPublished"></active-state-indicator>
+            </td>
+            <td>{{page.dateLastPublished ? (page.dateLastPublished | date: 'short') : 'Not published'}}</td>
+          </tr>
+          <tr *ngIf="pages.length === 0">
+            <td colspan="4">
+              There are no pages to display.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<div class="card shadow-sm mb-4">
-  <table class="table table-centered mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Friendly Name</th>
-        <th>Published</th>
-        <th>Date Published</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let page of pages">
-        <td>
-          <a class="cursor-pointer" [routerLink]="['/page', page.id]">
-            {{page.name}}
-          </a>
-        </td>
-        <td>
-          <active-state-indicator [flag]="page.isPublished"></active-state-indicator>
-        </td>
-        <td>{{page.dateLastPublished ? (page.dateLastPublished | date: 'short') : 'Not published'}}</td>
-      </tr>
-      <tr *ngIf="pages.length === 0">
-        <td colspan="4">
-          There are no pages to display.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <p class="lead">System Pages</p>
 
-<p class="lead">System Pages</p>
-
-<div class="card shadow-sm">
-  <table class="table table-centered mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Friendly Name</th>
-        <th>Abstract</th>
-        <th>Published</th>
-        <th>Date Published</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let systemPage of systemPages">
-        <td>
-          <a class="cursor-pointer" [routerLink]="['/page', systemPage.id]">
-            {{systemPage.name}}
-          </a>
-        </td>
-        <td>
-          <active-state-indicator [flag]="systemPage.isAbstract"></active-state-indicator>
-        </td>
-        <td>
-          <active-state-indicator [flag]="systemPage.isPublished"></active-state-indicator>
-        </td>
-        <td>{{systemPage.dateLastPublished ? (systemPage.dateLastPublished | date: 'short') : 'Not published'}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <div class="card shadow-sm">
+      <table class="table table-centered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Friendly Name</th>
+            <th>Abstract</th>
+            <th>Published</th>
+            <th>Date Published</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let systemPage of systemPages">
+            <td>
+              <a class="cursor-pointer" [routerLink]="['/page', systemPage.id]">
+                {{systemPage.name}}
+              </a>
+            </td>
+            <td>
+              <active-state-indicator [flag]="systemPage.isAbstract"></active-state-indicator>
+            </td>
+            <td>
+              <active-state-indicator [flag]="systemPage.isPublished"></active-state-indicator>
+            </td>
+            <td>{{systemPage.dateLastPublished ? (systemPage.dateLastPublished | date: 'short') : 'Not published'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page>

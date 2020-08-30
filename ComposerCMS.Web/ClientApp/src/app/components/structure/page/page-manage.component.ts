@@ -43,6 +43,7 @@ export class PageManageComponent implements OnInit {
 
   handlePage(page: Page): void {
     this.page = page;
+    console.log(this.page);
   }
 
   preview(): void {

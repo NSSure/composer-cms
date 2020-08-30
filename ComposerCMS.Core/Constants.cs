@@ -25,6 +25,7 @@ namespace ComposerCMS.Core
         public class Href
         {
             public static string ContentDirectory = "composer-cms";
+            public static string PackageDirectory = @$"{ContentDirectory}/package";
             public static string CssDirectory = $"{ContentDirectory}/css";
             public static string ThemeDirectory = $"{ContentDirectory}/themes";
             public static string JsDirectory = $"{ContentDirectory}/js";

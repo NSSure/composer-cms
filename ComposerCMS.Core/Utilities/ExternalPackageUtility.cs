@@ -1,6 +1,5 @@
 using CMSSure.Builder.Enums;
 using CMSSure.Builder.Models;
-using CMSSure.Builder.Utilities;
 using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Identity;
 using Microsoft.AspNetCore.Http;
@@ -15,12 +14,10 @@ namespace ComposerCMS.Core.Utility
 {
     public class ExternalPackageUtility : BaseRepository<ExternalPackage>
     {
-        private readonly ExternalPackageUtility _externalPackageUtil;
         private readonly ExternalResourceUtility _externalResourceUtil;
 
-        public ExternalPackageUtility(ExternalPackageUtility externalPackageUtil, ExternalResourceUtility externalResourceUtil, UserResolver userResolver) : base(userResolver)
+        public ExternalPackageUtility(ExternalResourceUtility externalResourceUtil, UserResolver userResolver) : base(userResolver)
         {
-            this._externalPackageUtil = externalPackageUtil;
             this._externalResourceUtil = externalResourceUtil;
         }
 
@@ -32,7 +29,9 @@ namespace ComposerCMS.Core.Utility
         /// <returns></returns>
         public async Task UploadLocalPackage(IFormFileCollection packageResources, string packageName)
         {
-            if (Directory.Exists(Path.Combine(Constants.Path.PackageDirectory, packageName)))
+            string _packagePath = Path.Combine(Constants.Path.PackageDirectory, packageName);
+
+            if (Directory.Exists(_packagePath))
             {
                 throw new Exception("Package already exists locally please change the name and try again.");
             }
@@ -44,25 +43,17 @@ namespace ComposerCMS.Core.Utility
 
             await this.AddAsync(_package);
 
+            _ = Directory.CreateDirectory(_packagePath);
+
             foreach (IFormFile packageFile in packageResources)
             {
-                //FileInfo _fileInfo = await this._externalResourceUtil.ConvertFileToPackageResource(packageFile, packageName);
-
-                //ExternalResource externalResource = new ExternalResource();
-
-                //externalResource.Name = _fileInfo.Name;
-                //externalResource.Extension = _fileInfo.Extension;
-                //externalResource.Path = $"~/composer-cms/js/{_fileInfo.Name}";
-                //externalResource.ExternalPackageID = uploadParams.ExternalPackageID;
-
-                //await this.AddAsync(externalResource);
+                await this._externalResourceUtil.ConvertFileToPackageResource(packageFile, _package);
             }
         }
 
         public async Task<List<ExternalResource>> ListPackageResources(Guid packageID)
         {
-            return null;
-            //return await this._externalPackageUtil.Table.Where(a => a.ExternalPackageID == packageID).ToListAsync();
+            return await this._externalResourceUtil.Table.Where(a => a.ExternalPackageID == packageID).ToListAsync();
         }
 
         /// <summary>
@@ -79,8 +70,7 @@ namespace ComposerCMS.Core.Utility
 
             foreach (ExternalResource resource in _resources)
             {
-                //HTMLNode _node = this._externalPackageUtil.GenerateIncludeNode(resource);
-                HTMLNode _node = null;
+                HTMLNode _node = this._externalResourceUtil.GenerateIncludeNode(resource);
 
                 if (_node.Tag == HTMLTag.Script)
                 {

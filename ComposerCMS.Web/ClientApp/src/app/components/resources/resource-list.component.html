@@ -1,31 +1,59 @@
-<div class="card shadow-sm" *ngIf="externalResources">
-  <table class="table table-centered mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Name</th>
-        <th>Href</th>
-        <th>Extension</th>
-        <th *ngIf="showAction"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let externalResource of externalResources">
-        <td>
-          <a class="cursor-pointer text-primary" (click)="viewResource(externalResource)">
-            <i class="fa fa-external-link"></i>&nbsp;{{externalResource.name}}
-          </a>
-        </td>
-        <td>{{externalResource.href}}</td>
-        <td>{{externalResource.extension}}</td>
-        <td *ngIf="showAction">
-          <a class="cursor-pointer text-primary" (click)="onActionClicked.next(externalResource)">{{actionText}}</a>
-        </td>
-      </tr>
-      <tr *ngIf="externalResources.length === 0">
-        <td colspan="5">
-          There are no external resources to display.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="externalResources">
+  <div class="form-group">
+    <select name="view" [(ngModel)]="viewMode">
+      <option value="list">List</option>
+      <option value="grid">Grid</option>
+    </select>
+  </div>
+  <div class="resource-grid" *ngIf="viewMode === 'grid'">
+    <div class="resource-item" *ngFor="let externalResource of externalResources">
+      <div class="resource-preview">
+        <img *ngIf="externalResource.extension === '.png' || externalResource.extension === '.jpg'; else elseBlock" [src]="externalResource.path" class="rounded" />
+        <ng-template #elseBlock>
+          <i class="fa fa-file-o fa-2x"></i>
+        </ng-template>
+      </div>
+      <div>
+        <span class="resource-name">{{externalResource.name}}</span><br />
+        <span>By: {{externalResource.userName}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow-sm" *ngIf="viewMode === 'list'">
+    <table class="table table-centered mb-0">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Extension</th>
+          <th>Owner</th>
+          <th>Date Added</th>
+          <th>Date Last Updated</th>
+          <th *ngIf="showAction"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let externalResource of externalResources">
+          <td>
+            <a class="cursor-pointer text-primary" (click)="viewResource(externalResource)">
+              <i class="fa fa-external-link"></i>&nbsp;{{externalResource.name}}
+            </a>
+          </td>
+          <td>
+            <span class="badge text-white" [ngClass]="{ 'bg-lang-css': externalResource.extension === '.css', 'bg-lang-js': externalResource.extension === '.js' }">{{externalResource.extension}}</span>
+          </td>
+          <td>{{externalResource.userName}}</td>
+          <td>{{externalResource.dateAdded | date: 'short'}}</td>
+          <td>{{externalResource.dateLastUpdated | date: 'short'}}</td>
+          <td *ngIf="showAction">
+            <a class="cursor-pointer text-primary" (click)="onActionClicked.next(externalResource)">{{actionText}}</a>
+          </td>
+        </tr>
+        <tr *ngIf="externalResources.length === 0">
+          <td colspan="5">
+            There are no external resources to display.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

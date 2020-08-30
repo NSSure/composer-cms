@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Utility;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using static ComposerCMS.Core.Utility.ExternalResourceUtility;
 
 namespace ComposerCMS.Web.Controllers
 {
@@ -22,7 +25,7 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                List<ExternalResource> externalResource = this._externalResourceUtil.ListAll();
+                List<ExternalResourceModel> externalResource = await this._externalResourceUtil.ListStandaloneResourceModelsAsync();
                 return StatusCode(200, externalResource);
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { ResourceListComponent } from './resource-list.component';
 import { PackageBundle } from '../../models/PackageBundle';
 import { HttpClient, HttpRequest, HttpEventType } from '@angular/common/http';
@@ -10,8 +10,10 @@ import { ExternalPackageService } from '../../services/external-package.service'
   providers: [ExternalPackageService]
 })
 export class ResourcesComponent implements OnInit {
-  @ViewChild(ResourceListComponent, { static: true }) resourceListComponent: ResourceListComponent;
+  @ViewChildren(ResourceListComponent) resourceListComponents: QueryList<ResourceListComponent>;
+
   @ViewChild('fileInput', { static: true }) fileInput: ElementRef;
+  @ViewChild('standaloneFiles', { static: true }) standaloneFiles: ElementRef;
 
   packageName: string;
   packageBundles: PackageBundle[] = [];
@@ -25,15 +27,19 @@ export class ResourcesComponent implements OnInit {
     this._externalPackageService.list().subscribe((packageBundles) => this.packageBundles = packageBundles);
   }
 
-  queryExternalResources() {
-    this.resourceListComponent.queryExternalResources();
-  }
-
   uploadPackage(files) {
-    this.upload(files, this.packageName);
+    this.upload(files, 'http://localhost:51494/api/external/package/upload', this.packageName).subscribe(() => {
+      this._externalPackageService.list().subscribe((packageBundles) => this.packageBundles = packageBundles);
+    });
   }
 
-  upload(files: Array<File>, params: any) {
+  uploadStandaloneResources(files) {
+    this.upload(files, 'http://localhost:51494/api/file/upload', null).subscribe(() => {
+      this.resourceListComponents.last.queryExternalResources();
+    });
+  }
+
+  upload(files: Array<File>, endpoint, params: any) {
     if (files.length === 0) {
       return;
     }
@@ -44,28 +50,14 @@ export class ResourcesComponent implements OnInit {
       formData.append(file.name, file);
     }
 
-    formData.append('params', params);
+    if (params) {
+      formData.append('params', params);
+    }
 
-    const uploadReq = new HttpRequest('POST', 'http://localhost:51494/api/external/package/upload', formData, {
+    const uploadReq = new HttpRequest('POST', endpoint, formData, {
       reportProgress: true,
     });
 
-    this._http.request(uploadReq).subscribe(event => {
-      switch (event.type) {
-        case HttpEventType.UploadProgress:
-          //let progress = Math.round(100 * event.loaded / event.total);
-          break;
-        case HttpEventType.Response:
-          let message = event.body.toString();
-          //let progress = null;
-          this.fileInput.nativeElement.value = null;
-          break;
-      }
-      if (event.type === HttpEventType.UploadProgress) {
-
-      } else if (event.type === HttpEventType.Response) {
-
-      }
-    });
+    return this._http.request(uploadReq);
   }
 }

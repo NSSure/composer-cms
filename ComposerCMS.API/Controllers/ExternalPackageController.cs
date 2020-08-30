@@ -24,31 +24,8 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                var file = Request.Form.Files[0];
-
-                await this._externalPackageUtil.UploadLocalPackage(Request.Form.Files, string.Empty);
-
-                var _t = await this._externalPackageUtil.Table.ToListAsync();
-
-                List<PackageBundle> _models = new List<PackageBundle>();
-
-                foreach (var item in _t)
-                {
-                    List<ExternalResource> _packageResource = await this._externalPackageUtil.ListPackageResources(item.ID);
-
-                    _models.Add(new PackageBundle()
-                    {
-                        ID = item.ID,
-                        DateAdded = item.DateAdded,
-                        DateLastUpdated = item.DateLastUpdated,
-                        Name = item.Name,
-                        UserIDAdded = item.UserIDAdded,
-                        UserIDLastUpdated = item.UserIDLastUpdated,
-                        PackageResources = _packageResource
-                    });
-                }
-
-                return StatusCode(200, _models);
+                await this._externalPackageUtil.UploadLocalPackage(Request.Form.Files, Request.Form["params"]);
+                return StatusCode(200, true);
             }
             catch (Exception ex)
             {

@@ -254,6 +254,13 @@ namespace ComposerCMS.Core.DAL
                 // Delete the database.
                 await context.Database.EnsureDeletedAsync();
 
+                Directory.Delete(Constants.Path.CssDirectory, true);
+                Directory.Delete(Constants.Path.JsDirectory, true);
+                Directory.Delete(Constants.Path.MediaDirectory, true);
+                Directory.Delete(Constants.Path.PackageDirectory, true);
+
+                ComposerCMSApp.EnsureContentDirectories();
+
                 // Reinitialize the database from scratch.
                 Initialize();
             }

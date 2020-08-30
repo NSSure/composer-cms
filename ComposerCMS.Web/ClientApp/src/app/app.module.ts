@@ -34,6 +34,8 @@ import { BlogManageComponent } from './components/blog/blog-manage.component';
 import { PostListComponent } from './components/post/post-list.component';
 import { PostManageComponent } from './components/post/post-manage.component';
 import { ActiveStateIndicatorComponent } from './components/helpers/active-state-indicator.component';
+import { AppPageComponent } from './components/app-page/app-page.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -69,6 +71,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MainComponent,
+    AppPageComponent,
     LoginComponent,
     SideMenuComponent,
     PageListComponent,

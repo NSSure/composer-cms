@@ -13,6 +13,7 @@ export class ResourceListComponent implements OnInit {
   @Input() method: any;
   @Input() manualQuery: boolean = false;
   @Input() externalResources: ExternalResource[];
+  @Input() viewMode: string = 'grid';
 
   @Output() onActionClicked = new EventEmitter<ExternalResource>();
 
@@ -29,7 +30,6 @@ export class ResourceListComponent implements OnInit {
   }
 
   viewResource(externalResource: ExternalResource) {
-    let url = externalResource.path.substr(1, externalResource.path.length);
-    window.open(`http://localhost:51494/${url}`)
+    window.open(`http://localhost:51494${externalResource.path}`);
   }
 }

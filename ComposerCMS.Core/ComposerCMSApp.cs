@@ -89,6 +89,11 @@ namespace ComposerCMS.Core
             {
                 Directory.CreateDirectory(Constants.Path.MediaDirectory);
             }
+
+            if (!Directory.Exists(Constants.Path.PackageDirectory))
+            {
+                Directory.CreateDirectory(Constants.Path.PackageDirectory);
+            }
         }
 
         public static void EnsureExternalResourceDirectories()

@@ -9,4 +9,7 @@ export class ExternalResource {
   dateLastUpdated: Date;
   userIdAdded: string;
   userIdUpdated: string;
+
+  // TODO: Convert this to a model.
+  userName: string;
 }

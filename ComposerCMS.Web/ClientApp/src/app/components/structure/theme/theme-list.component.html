@@ -1,22 +1,26 @@
-<div class="card shadow-sm">
-  <table class="table table-centered mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Friendly Name</th>
-        <th>Description</th>
-        <th>Author</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let theme of themes" [ngClass]="{'fill-success': isThemeApplied(theme.key)}">
-        <td>{{theme.friendlyName}}</td>
-        <td>{{theme.description}}</td>
-        <td>{{theme.author}}</td>
-        <td>
-          <a class="cursor-pointer text-primary" *ngIf="!isThemeApplied(theme.key)" (click)="apply(theme.key)">Apply</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-page>
+  <div contents>
+    <div class="card shadow-sm">
+      <table class="table table-centered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Friendly Name</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let theme of themes" [ngClass]="{'fill-success': isThemeApplied(theme.key)}">
+            <td>{{theme.friendlyName}}</td>
+            <td>{{theme.description}}</td>
+            <td>{{theme.author}}</td>
+            <td>
+              <a class="cursor-pointer text-primary" *ngIf="!isThemeApplied(theme.key)" (click)="apply(theme.key)">Apply</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page>
