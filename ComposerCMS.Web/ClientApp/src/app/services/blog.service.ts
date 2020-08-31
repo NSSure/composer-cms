@@ -9,7 +9,7 @@ import { Blog } from '../models/Blog';
 @Injectable()
 export class BlogService extends BaseService {
   get api() {
-    return `${super.api}/api/account/`;
+    return `${super.api}/api/blog/`;
   }
 
   add(blog: Blog) {

@@ -22,8 +22,9 @@ export class BlogManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._blogService.get(this.blogId).subscribe((blog) => this.blog = blog);
-
+    if (this.blogId) {
+      this._blogService.get(this.blogId).subscribe((blog) => this.blog = blog);
+    }
   }
 
   save(): void {

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\pipes\callback.pipe.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Pages\Themes\dark\css\theme.scss" />
     <Content Include="Pages\Themes\default\css\animations\_fade.scss" />
     <Content Include="Pages\Themes\default\css\animations\_pulse.scss" />
@@ -81,6 +85,10 @@
     <Folder Include="wwwroot\composer-cms\css\" />
     <Folder Include="wwwroot\composer-cms\js\" />
     <Folder Include="wwwroot\composer-cms\themes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\callback.pipe.ts" />
   </ItemGroup>
 
 </Project>

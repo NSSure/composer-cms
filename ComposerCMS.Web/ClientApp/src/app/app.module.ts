@@ -35,7 +35,7 @@ import { PostListComponent } from './components/post/post-list.component';
 import { PostManageComponent } from './components/post/post-manage.component';
 import { ActiveStateIndicatorComponent } from './components/helpers/active-state-indicator.component';
 import { AppPageComponent } from './components/app-page/app-page.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
+import { CallbackPipe } from './pipes/callback.pipe';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -94,7 +94,8 @@ const appRoutes: Routes = [
     BlogManageComponent,
     PostListComponent,
     PostManageComponent,
-    ActiveStateIndicatorComponent
+    ActiveStateIndicatorComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,

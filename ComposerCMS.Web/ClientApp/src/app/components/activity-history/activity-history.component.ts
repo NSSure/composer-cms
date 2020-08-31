@@ -9,6 +9,7 @@ import { ActivityHistoryService } from '../../services/activity-history.service'
 })
 export class ActivityHistoryComponent implements OnInit {
   activityHistory: ActivityHistory[] = [];
+  entity: string = '';
 
   constructor(private _activityHistoryService: ActivityHistoryService) {
 
@@ -16,5 +17,13 @@ export class ActivityHistoryComponent implements OnInit {
 
   ngOnInit() {
     this._activityHistoryService.list().subscribe((activityHistory) => this.activityHistory = activityHistory);
+  }
+
+  filterActivity = (activity: ActivityHistory) => {
+    if (this.entity == '') {
+      return true;
+    }
+
+    return activity.entity === this.entity;
   }
 }
