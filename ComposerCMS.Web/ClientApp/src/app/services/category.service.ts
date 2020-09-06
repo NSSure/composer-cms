@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CategoryService extends BaseService {
   get api() {
-    return `${super.api}/api/category`;
+    return `${super.api}/api/category/`;
   }
 
   add(category: Category) {

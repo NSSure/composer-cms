@@ -1,4 +1,7 @@
 <app-page>
+  <div actions>
+    <button type="button" class="btn btn-primary" routerLink="/category">Add New Category</button>
+  </div>
   <div content>
     <div class="card shadow-sm">
       <table class="table table-centered mb-0">
@@ -10,6 +13,11 @@
         <tbody>
           <tr *ngFor="let category of categories">
             <td>{{category.name}}</td>
+          </tr>
+          <tr *ngIf="categories.length === 0">
+            <td colspan="4">
+              There are no product categories to display.
+            </td>
           </tr>
         </tbody>
       </table>

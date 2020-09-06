@@ -67,9 +67,9 @@ const appRoutes: Routes = [
       { path: 'products', component: ProductListComponent, data: { pageTitle: 'Products' } },
       { path: 'product', component: ProductManageComponent, data: { pageTitle: 'Create New Product' } },
       { path: 'product/:productId', component: ProductManageComponent, data: { pageTitle: 'Manage Product' } },
-      { path: 'product/categories', component: CategoryListComponent, data: { pageTitle: 'Product Categories' } },
-      { path: 'product/category', component: CategoryManageComponent, data: { pageTitle: 'Create New Product Category' } },
-      { path: 'product/category/:categoryId', component: CategoryManageComponent, data: { pageTitle: 'Manage Product Category' } },
+      { path: 'categories', component: CategoryListComponent, data: { pageTitle: 'Product Categories' } },
+      { path: 'category', component: CategoryManageComponent, data: { pageTitle: 'Create New Product Category' } },
+      { path: 'category/:categoryId', component: CategoryManageComponent, data: { pageTitle: 'Manage Product Category' } },
 
       { path: 'resources', component: ResourcesComponent, data: { pageTitle: 'Resources' } },
       { path: 'themes', component: ThemeListComponent, data: { pageTitle: 'Themes' } },
