@@ -1,4 +1,6 @@
 .form-section {
+    display: flex;
+    flex-direction: column;
     padding-bottom: $padding-default;
 
     > .form-label {
@@ -10,7 +12,7 @@
 
 .input-element {
     display: block;
-    width: 100%;
+    /*width: 100%;*/
     border: $border-width-small solid $color-grey;
     padding: 10px;
 }

@@ -4,8 +4,126 @@
     ViewData["Title"] = "Cart";
 }
 
+<style>
+    .cart {
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        border-radius: 8px;
+    }
+
+        .cart .cart-items {
+            flex-basis: 75%;
+        }
+
+        .cart .cart-items .cart-item {
+            margin-bottom: 45px;
+        }
+
+            .cart .cart-items .cart-item .cart-item-title {
+                font-size: 1.25em;
+                padding-bottom: 5px;
+            }
+
+            .cart .cart-items .cart-item .cart-item-sku {
+                font-size: .75em;
+            }
+
+            .cart .cart-items .cart-item img {
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                object-fit: contain;
+                width: 150px;
+                border-radius: 8px;
+            }
+
+        .cart .cart-overview {
+            flex-basis: 25%;
+            padding: 15px;
+        }
+
+            .cart .cart-overview .cart-price-title {
+                text-transform: uppercase;
+                font-size: .75em;
+                padding-bottom: 10px;
+            }
+
+        .cart .cart-overview .cart-price {
+            font-size: 1.5em;
+        }
+
+    .cart-item-title {
+        font-size: 1.25em;
+        padding-bottom: 5px;
+    }
+
+    .cart-item-sku {
+        font-size: 0.75em;
+    }
+</style>
+
 <div class="app-page">
-    <div class="product-categories">
-        <h1>Shopping Cart</h1>
+    <div class="content-page">
+        <div class="product-categories">
+            <h1>Shopping Cart</h1>
+            <div class="cart">
+                <div class="cart-items">
+                    <table class="table">
+                        <thead class="fill-light">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Product</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
+                                <td>Total</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (int number in System.Linq.Enumerable.Range(0, 5))
+                            {
+                                <tr>
+                                    <td>
+                                        <a class="text-red cursor-pointer">
+                                            <span>&#88;</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <img src="~/composer-cms/media/sunflower.jpg" width="150" />
+                                    </td>
+                                    <td>
+                                        <div class="cart-item-title">Criss Cross Fuzzy Slippers</div>
+                                        <div class="cart-item-sku">DPROD1-1001</div>
+                                    </td>
+                                    <td>
+                                        <button type="button">-</button>
+                                        <span>1</span>
+                                        <button type="button">+</button>
+                                    </td>
+                                    <td>
+                                        $100
+                                    </td>
+                                    <td>
+                                        $100
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cart-overview fill-light border-defau">
+                    <div class="section">
+                        <div class="cart-price-title">Cart total</div>
+                        <div class="cart-price">$185.00</div>
+                    </div>
+
+                    <div class="form-section">
+                        <label class="form-label">Discount code?</label>
+                        <input type="text" class="input-element" />
+                    </div>
+
+                    <button type="button" class="button fill-dark text-white is-medium" style="width: 100%;">Checkout</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
