@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Folder Include="BlogSystem\Model\" />
+    <Folder Include="CoreSystem\DAL\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

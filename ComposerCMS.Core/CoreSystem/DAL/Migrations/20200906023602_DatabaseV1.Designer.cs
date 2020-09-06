@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace ComposerCMS.Core.Migrations
+namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
 {
     [DbContext(typeof(ComposerCMSContext))]
-    [Migration("20200824011342_DatabaseV1")]
+    [Migration("20200906023602_DatabaseV1")]
     partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -473,6 +473,114 @@ namespace ComposerCMS.Core.Migrations
                     b.ToTable("Post");
                 });
 
+            modelBuilder.Entity("ComposerCMS.Core.Entity.ProductSystem.Category", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateLastUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("character varying(512)")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<Guid>("UserIDAdded")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserIDLastUpdated")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("Category","Product");
+                });
+
+            modelBuilder.Entity("ComposerCMS.Core.Entity.ProductSystem.Product", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("AllowOutOfStockPurchases")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateLastUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("character varying(1024)")
+                        .HasMaxLength(1024);
+
+                    b.Property<bool>("HasVariants")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsPhysical")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsPublished")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("SKU")
+                        .HasColumnType("character varying(36)")
+                        .HasMaxLength(36);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<bool>("TrackQuantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<Guid>("UserIDAdded")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserIDLastUpdated")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SKU");
+
+                    b.HasIndex("Title");
+
+                    b.ToTable("Product","Product");
+                });
+
             modelBuilder.Entity("ComposerCMS.Core.Entity.Route", b =>
                 {
                     b.Property<Guid>("ID")
@@ -592,35 +700,35 @@ namespace ComposerCMS.Core.Migrations
                         new
                         {
                             Id = "993ab932-df4d-47ba-902f-2ec313dc4e73",
-                            ConcurrencyStamp = "ab55bc52-fa95-4d96-9dbc-d98a2219050c",
+                            ConcurrencyStamp = "dc489134-3373-4ba1-b74d-82f8e6b01dda",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4d323c3f-d805-4932-bb1e-02cc2d0f58b5",
-                            ConcurrencyStamp = "327bb8b4-e8b4-4bba-88c2-bd311d61fdf4",
+                            ConcurrencyStamp = "fd5329f8-81f2-4c43-845d-7030f7e332ec",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed",
-                            ConcurrencyStamp = "a4987087-affb-46e7-9f6c-ea9e9dbec4d0",
+                            ConcurrencyStamp = "e5c51994-9d4b-4cc3-8008-5d8d0fb6717b",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
                             Id = "a7f52a41-4c4c-45e0-9088-a89cb25dea92",
-                            ConcurrencyStamp = "a9a1c723-97fe-4ae0-9cc5-40a920009ff2",
+                            ConcurrencyStamp = "d6cb016c-8e66-4aa6-b12c-5f9787f67705",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
                             Id = "e3c7b0e0-88f7-4bd0-b846-66c63db1f614",
-                            ConcurrencyStamp = "9c3ef1e9-f5a6-4f13-bcd1-b49e66ea3931",
+                            ConcurrencyStamp = "580467b5-1a6f-44f7-add1-7b607769071b",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -718,13 +826,13 @@ namespace ComposerCMS.Core.Migrations
                         {
                             Id = "de0fa044-1d5b-44d7-a93e-66598b2b7c84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "630c07cd-478a-413b-897a-6d2be773344f",
+                            ConcurrencyStamp = "03915816-c2a8-47d7-9df6-7e683b9cf8b8",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJcsNuVfjvlwedRGAgnSsuxrSXisE4vUPYrQ0VM9zLpD5GR6HAL/+s/TvrKutgD0rQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBMGlKZzEd+MF6/OPdnur80izOvkz9YKo78IU7YezvAW3SZ1RckymfXHmUBhKiHOQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9891c8e7-0108-4852-8689-0c1f91e18724",
+                            SecurityStamp = "13e78fb0-7c40-4012-8a7f-759b15d4c4c7",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

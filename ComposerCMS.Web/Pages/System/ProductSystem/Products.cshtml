@@ -1,0 +1,37 @@
+﻿@page "{categoryRoute}"
+@{
+    ViewData["Title"] = "Category Products";
+}
+
+<div style="display: flex; flex-direction: row;">
+    <nav class="nav nav-list border-default-right" style="width: 250px; padding: 30px;">
+        <ul class="nav-group">
+            <li class="item-header">All Product Categories</li>
+            <li><a href="installation">Tops</a></li>
+            <li><a href="release-notes">New Arrivals</a></li>
+            <li><a href="installation">Bottoms</a></li>
+            <li><a href="installation">Dresses</a></li>
+            <li><a href="installation">Jewelry</a></li>
+            <li><a href="installation">Shoes</a></li>
+            <li><a href="installation">On Sale</a></li>
+            <li><a href="installation">Outerwear</a></li>
+        </ul>
+    </nav>
+    <div class="content-page" style="flex: 1;">
+        @await Component.InvokeAsync("Breadcrumbs")
+
+        <h1>Category - Tops</h1>
+
+        <div class="product-categories-grid">
+            @foreach (int number in System.Linq.Enumerable.Range(0, 9))
+            {
+                <div class="category">
+                    <a href="/product/product1">
+                        <img src="http://via.placeholder.com/300" />
+                        <h2 class="category-name">Tops</h2>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

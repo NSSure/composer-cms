@@ -1,0 +1,10 @@
+@model List<ComposerCMS.Core.Entity.Route>;
+
+<nav>
+    <ol class="cd-breadcrumb">
+        @foreach (ComposerCMS.Core.Entity.Route route in this.Model)
+        {
+            <li><a href="@route.Url">@route.OriginalEntityText</a></li>
+        }
+    </ol>
+</nav>

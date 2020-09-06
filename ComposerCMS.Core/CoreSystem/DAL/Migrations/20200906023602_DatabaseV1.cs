@@ -2,12 +2,15 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace ComposerCMS.Core.Migrations
+namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
 {
     public partial class DatabaseV1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Product");
+
             migrationBuilder.CreateTable(
                 name: "ActivityHistory",
                 columns: table => new
@@ -323,6 +326,51 @@ namespace ComposerCMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Category",
+                schema: "Product",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: true),
+                    Description = table.Column<string>(maxLength: 512, nullable: true),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    DateLastUpdated = table.Column<DateTime>(nullable: false),
+                    UserIDAdded = table.Column<Guid>(nullable: false),
+                    UserIDLastUpdated = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                schema: "Product",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(maxLength: 128, nullable: true),
+                    Description = table.Column<string>(maxLength: 1024, nullable: true),
+                    SKU = table.Column<string>(maxLength: 36, nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    Cost = table.Column<decimal>(nullable: false),
+                    TrackQuantity = table.Column<bool>(nullable: false, defaultValue: true),
+                    Quantity = table.Column<int>(nullable: false, defaultValue: 0),
+                    IsPhysical = table.Column<bool>(nullable: false, defaultValue: true),
+                    HasVariants = table.Column<bool>(nullable: false, defaultValue: false),
+                    AllowOutOfStockPurchases = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsPublished = table.Column<bool>(nullable: false, defaultValue: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    DateLastUpdated = table.Column<DateTime>(nullable: false),
+                    UserIDAdded = table.Column<Guid>(nullable: false),
+                    UserIDLastUpdated = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -433,17 +481,17 @@ namespace ComposerCMS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "ab55bc52-fa95-4d96-9dbc-d98a2219050c", "Admin", "ADMIN" },
-                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "327bb8b4-e8b4-4bba-88c2-bd311d61fdf4", "Editor", "EDITOR" },
-                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "a4987087-affb-46e7-9f6c-ea9e9dbec4d0", "Author", "AUTHOR" },
-                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "a9a1c723-97fe-4ae0-9cc5-40a920009ff2", "Contributor", "CONTRIBUTOR" },
-                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "9c3ef1e9-f5a6-4f13-bcd1-b49e66ea3931", "User", "USER" }
+                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "dc489134-3373-4ba1-b74d-82f8e6b01dda", "Admin", "ADMIN" },
+                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "fd5329f8-81f2-4c43-845d-7030f7e332ec", "Editor", "EDITOR" },
+                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "e5c51994-9d4b-4cc3-8008-5d8d0fb6717b", "Author", "AUTHOR" },
+                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "d6cb016c-8e66-4aa6-b12c-5f9787f67705", "Contributor", "CONTRIBUTOR" },
+                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "580467b5-1a6f-44f7-add1-7b607769071b", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "630c07cd-478a-413b-897a-6d2be773344f", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEJcsNuVfjvlwedRGAgnSsuxrSXisE4vUPYrQ0VM9zLpD5GR6HAL/+s/TvrKutgD0rQ==", null, false, "9891c8e7-0108-4852-8689-0c1f91e18724", false, "Admin" });
+                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "03915816-c2a8-47d7-9df6-7e683b9cf8b8", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBMGlKZzEd+MF6/OPdnur80izOvkz9YKo78IU7YezvAW3SZ1RckymfXHmUBhKiHOQA==", null, false, "13e78fb0-7c40-4012-8a7f-759b15d4c4c7", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -581,6 +629,24 @@ namespace ComposerCMS.Core.Migrations
                 name: "IX_Post_Title",
                 table: "Post",
                 column: "Title");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Category_Name",
+                schema: "Product",
+                table: "Category",
+                column: "Name");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_SKU",
+                schema: "Product",
+                table: "Product",
+                column: "SKU");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_Title",
+                schema: "Product",
+                table: "Product",
+                column: "Title");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -644,6 +710,14 @@ namespace ComposerCMS.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "Category",
+                schema: "Product");
+
+            migrationBuilder.DropTable(
+                name: "Product",
+                schema: "Product");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

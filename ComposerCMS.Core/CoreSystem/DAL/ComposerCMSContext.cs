@@ -1,5 +1,6 @@
 using ComposerCMS.Core.DAL.Config;
 using ComposerCMS.Core.Entity;
+using ComposerCMS.Core.Entity.ProductSystem;
 using ComposerCMS.Core.Entity.Structure;
 using ComposerCMS.Core.Model;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,9 @@ namespace ComposerCMS.Core.DAL
         public DbSet<MenuItem> MenuItem { get; set; }
         public DbSet<Settings> Settings { get; set; }
 
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -67,6 +71,9 @@ namespace ComposerCMS.Core.DAL
             modelBuilder.ApplyConfiguration(new MenuConfig());
             modelBuilder.ApplyConfiguration(new MenuItemConfig());
             modelBuilder.ApplyConfiguration(new SettingsConfig());
+
+            modelBuilder.ApplyConfiguration(new CategoryConfig());
+            modelBuilder.ApplyConfiguration(new ProductConfig());
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.AdminID.ToString(), Name = "Admin", NormalizedName = "Admin".ToUpper() });
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.EditorID.ToString(), Name = "Editor", NormalizedName = "Editor".ToUpper() });

@@ -4,6 +4,7 @@ using ComposerCMS.Core.Identity;
 using ComposerCMS.Core.Middleware;
 using ComposerCMS.Core.Model;
 using ComposerCMS.Core.Utilities;
+using ComposerCMS.Core.Utilities.ProductSystem;
 using ComposerCMS.Core.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -153,6 +154,9 @@ namespace ComposerCMS.API
             services.AddTransient<PostUtility>();
             services.AddTransient<RouteUtility>();
 
+            services.AddTransient<ProductCategoryUtility>();
+            services.AddTransient<ProductUtility>();
+
             services.AddTransient<UserResolver>();
             services.AddScoped<IAuthenticationService, TokenAuthenticationService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -161,6 +165,8 @@ namespace ComposerCMS.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+
             app.UseMiddleware<UrlRewritingMiddleware>();
 
             app.UseAuthentication();

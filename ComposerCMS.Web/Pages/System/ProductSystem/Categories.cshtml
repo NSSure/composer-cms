@@ -1,0 +1,26 @@
+﻿@page
+@model ComposerCMS.Web.Models.System.ProductSystem.CategoriesModel
+@{
+    ViewData["Title"] = "Product Categories";
+}
+
+<div class="app-page">
+    <div class="product-categories">
+        <div class="category-header">
+            @await Component.InvokeAsync("Breadcrumbs")
+
+            <h1>All Categories</h1>
+        </div>
+        <div class="product-categories-grid">
+            @foreach (ComposerCMS.Core.Entity.ProductSystem.Category productCategory in this.Model.ProductCategories)
+            {
+                <div class="category">
+                    <a href="@this.Model.RouteMap[productCategory.ID].Url">
+                        <img src="http://via.placeholder.com/300" />
+                        <h2 class="category-name">@productCategory.Name</h2>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

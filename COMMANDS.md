@@ -1,0 +1,1 @@
+dotnet ef migrations add DatabaseV1 --project ../ComposerCMS.Core -o CoreSystem/DAL/Migrations

@@ -1,12 +1,12 @@
 .nav {
     &.nav-menu {
-        height: 120px;
+        height: 60px;
         list-style-type: none;
         display: flex;
         flex: 0 0 auto;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        line-height: 30px;
         margin: 0;
         padding: 0 40px;
 
@@ -39,7 +39,7 @@
             font-weight: normal;
             padding: 15px;
 
-            a {
+            z a {
                 color: $color-dark;
                 text-decoration: none;
                 height: 100%;
@@ -49,23 +49,31 @@
         .nav-item {
             display: flex;
             list-style-type: none;
+            padding: 0;
+            margin: 0;
 
             > li {
                 padding: $padding-default;
 
                 a {
                     color: $color-dark;
-                    font-size: 28px;
+                    font-size: 16px !important;
+                    position: relative;
+                    transition: font-size 0.5s;
+
+                    &:hover {
+                        font-size: 18px;
+                    }
                 }
 
                 .nav-menu.fill-dark & {
                     background-color: black;
                 }
 
-                &:hover {
+                /*&:hover {
                     background-color: darken($color: $color-light, $amount: 5);
                     cursor: pointer;
-                }
+                }*/
             }
         }
 

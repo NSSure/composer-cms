@@ -35,6 +35,8 @@ namespace ComposerCMS.Core
         public class Route
         {
             public static string BlogBaseUrl = "blog";
+            public static string ProductBaseUrl = "product";
+            public static string ProductCategoryBaseUrl = "product/categories";
         }
 
         public class Settings

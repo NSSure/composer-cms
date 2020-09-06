@@ -36,6 +36,10 @@ import { PostManageComponent } from './components/post/post-manage.component';
 import { ActiveStateIndicatorComponent } from './components/helpers/active-state-indicator.component';
 import { AppPageComponent } from './components/app-page/app-page.component';
 import { CallbackPipe } from './pipes/callback.pipe';
+import { ProductListComponent } from './components/product-system/product/product-list.component';
+import { ProductManageComponent } from './components/product-system/product/product-manage.component';
+import { CategoryListComponent } from './components/product-system/category/category-list.component';
+import { CategoryManageComponent } from './components/product-system/category/category-manage.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -51,12 +55,21 @@ const appRoutes: Routes = [
       { path: 'menus', component: MenuListComponent, data: { pageTitle: 'Menus' } },
       { path: 'menu', component: MenuManageComponent, data: { pageTitle: 'Create New Menu' } },
       { path: 'menu/:menuId', component: MenuManageComponent, data: { pageTitle: 'Manage Menu' } },
-      
+
+      // Blog system routes.
       { path: 'blogs', component: BlogListComponent, data: { pageTitle: 'Blogs' } },
       { path: 'blog', component: BlogManageComponent, data: { pageTitle: 'Create New Blog' } },
       { path: 'blog/:blogId', component: BlogManageComponent, data: { pageTitle: 'Manage Blog' } },
       { path: 'blog/:blogId/post', component: PostManageComponent, data: { pageTitle: 'Create New Post' } },
       { path: 'blog/:blogId/post/:postId', component: PostManageComponent, data: { pageTitle: 'Manage Post' } },
+
+      // Product system routes.
+      { path: 'products', component: ProductListComponent, data: { pageTitle: 'Products' } },
+      { path: 'product', component: ProductManageComponent, data: { pageTitle: 'Create New Product' } },
+      { path: 'product/:productId', component: ProductManageComponent, data: { pageTitle: 'Manage Product' } },
+      { path: 'product/categories', component: CategoryListComponent, data: { pageTitle: 'Product Categories' } },
+      { path: 'product/category', component: CategoryManageComponent, data: { pageTitle: 'Create New Product Category' } },
+      { path: 'product/category/:categoryId', component: CategoryManageComponent, data: { pageTitle: 'Manage Product Category' } },
 
       { path: 'resources', component: ResourcesComponent, data: { pageTitle: 'Resources' } },
       { path: 'themes', component: ThemeListComponent, data: { pageTitle: 'Themes' } },
@@ -95,7 +108,11 @@ const appRoutes: Routes = [
     PostListComponent,
     PostManageComponent,
     ActiveStateIndicatorComponent,
-    CallbackPipe
+    CallbackPipe,
+    ProductListComponent,
+    ProductManageComponent,
+    CategoryListComponent,
+    CategoryManageComponent
   ],
   imports: [
     BrowserModule,
