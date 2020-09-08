@@ -10,6 +10,11 @@
         margin: 0;
         padding: 0 40px;
 
+        &.flush {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         .nav-toggle {
             @media only screen and (max-width: 768px) {
                 display: block;
@@ -27,6 +32,7 @@
         > .nav-right {
             display: flex;
             justify-content: flex-end;
+            flex: 1;
 
             @media only screen and (max-width: 768px) {
                 display: none;
@@ -69,7 +75,6 @@
                 .nav-menu.fill-dark & {
                     background-color: black;
                 }
-
                 /*&:hover {
                     background-color: darken($color: $color-light, $amount: 5);
                     cursor: pointer;
@@ -146,6 +151,20 @@
         li {
             a {
                 text-decoration: none;
+            }
+        }
+
+        &.slim {
+            height: 30px;
+
+            .nav-item {
+                > li {
+                    padding: 0 5px;
+
+                    a {
+                        font-size: $font-size-small !important;
+                    }
+                }
             }
         }
     }

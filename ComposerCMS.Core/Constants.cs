@@ -36,7 +36,7 @@ namespace ComposerCMS.Core
         {
             public static string BlogBaseUrl = "blog";
             public static string ProductBaseUrl = "product";
-            public static string ProductCategoryBaseUrl = "product/categories";
+            public static string CategoryBaseUrl = "categories";
         }
 
         public class Settings

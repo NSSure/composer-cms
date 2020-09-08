@@ -1,11 +1,15 @@
 .container {
-    /*width: 50%;*/
-    width: 785px;
+    width: 768px;
     margin: 0 auto;
 }
 
 .container-lg {
-    width: 50%;
+    width: 992px;
+    margin: 0 auto;
+}
+
+.container-xlg {
+    width: 1260px;
     margin: 0 auto;
 }
 

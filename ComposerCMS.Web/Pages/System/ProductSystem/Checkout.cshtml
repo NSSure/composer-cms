@@ -1,0 +1,59 @@
+﻿@page
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<style>
+    .content-page {
+        max-width: 572px;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="app-page">
+    <div class="content-page">
+        <h1>Hope ReStored Thrift</h1>
+
+        @await Component.InvokeAsync("Breadcrumbs")
+
+
+
+        <div class="section">
+            <div class="form-section">
+                <span class="text-large">Billing Details</span>
+            </div>
+            <div class="form-section">
+                <span class="form-label">Full Name</span>
+                <input type="text" class="input-element" />
+            </div>
+            <div class="form-section">
+                <span class="form-label">Country</span>
+                <input type="text" class="input-element" />
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="form-section">
+                        <span class="form-label">City</span>
+                        <input type="text" class="input-element" />
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="form-section">
+                        <span class="form-label">State</span>
+                        <input type="text" class="input-element" />
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="form-section">
+                        <span class="form-label">Zip Code</span>
+                        <input type="text" class="input-element" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+
+        </div>
+    </div>
+</div>

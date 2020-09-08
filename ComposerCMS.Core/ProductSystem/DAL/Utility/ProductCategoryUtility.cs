@@ -23,7 +23,7 @@ namespace ComposerCMS.Core.Utilities.ProductSystem
                 try
                 {
                     await this.AddAsync(productCategory);
-                    await this._routeUtil.TryProcessRoute(productCategory.ID, productCategory.Name, Constants.Route.ProductCategoryBaseUrl);
+                    await this._routeUtil.TryProcessRoute(productCategory.ID, productCategory.Name, "category");
                     await transaction.CommitAsync();
                 }
                 catch (Exception ex)

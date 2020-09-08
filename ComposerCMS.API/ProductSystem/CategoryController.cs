@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ComposerCMS.Web.Controllers
 {
-    [Route("api/product")]
+    [Route("api/category")]
     public class CategoryController : Controller
     {
         private readonly ProductCategoryUtility _productCategoryUtil;
@@ -48,7 +48,7 @@ namespace ComposerCMS.Web.Controllers
             return StatusCode(200, true);
         }
 
-        [HttpPost("list")]
+        [HttpGet("list")]
         public async Task<IActionResult> ListCategories()
         {
             try

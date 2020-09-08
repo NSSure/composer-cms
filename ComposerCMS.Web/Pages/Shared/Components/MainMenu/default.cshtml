@@ -1,8 +1,34 @@
 @model ComposerCMS.Core.Model.MenuScaffold
 
+<div class="fill-white is-shadowed fill-light">
+    <div class="container-xlg">
+        <div class="nav nav-menu slim flush">
+            <div class="nav-right">
+                <ul class="nav-item">
+                    <li>
+                        <a class="text-decoration-none" href="/checkout">
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-decoration-none" href="/checkout">
+                            Signup
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-decoration-none" href="/checkout">
+                            0 cart $0.00
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="fill-white is-shadowed">
-    <div class="container-lg">
-        <div class="nav nav-menu">
+    <div class="container-xlg">
+        <div class="nav nav-menu flush">
             <div class="nav-left">
                 <span class="nav-text">
                     <a href="/">
@@ -18,6 +44,11 @@
                             <a href="@itemScaffold.Url">@itemScaffold.DisplayText</a>
                         </li>
                     }
+                    <li>
+                        <a class="text-decoration-none" href="/checkout">
+                            0 cart $0.00
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
