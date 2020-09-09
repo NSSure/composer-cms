@@ -7,7 +7,7 @@ using ComposerCMS.Core.Entity.ProductSystem;
 
 namespace ComposerCMS.Web.Controllers
 {
-    [Route("api/product")]
+    [Route("api/productsystem/product")]
     public class ProductController : Controller
     {
         private readonly ProductUtility _productUtil;

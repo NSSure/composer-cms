@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ComposerCMS.Web.Controllers
 {
-    [Route("api/category")]
+    [Route("api/productsystem/category")]
     public class CategoryController : Controller
     {
         private readonly ProductCategoryUtility _productCategoryUtil;

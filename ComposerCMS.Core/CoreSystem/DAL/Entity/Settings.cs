@@ -13,6 +13,9 @@ namespace ComposerCMS.Core.Entity
         public Guid UserIDLastUpdated { get; set; }
         public Guid? ThemeKey { get; set; }
 
+        public string StripePublishableKey { get; set; }
+        public string StripeSecretKey { get; set; }
+
         /// <summary>
         /// Ignored.
         /// </summary>
