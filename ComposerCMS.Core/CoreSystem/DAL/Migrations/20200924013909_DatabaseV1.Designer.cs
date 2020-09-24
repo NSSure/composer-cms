@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
 {
     [DbContext(typeof(ComposerCMSContext))]
-    [Migration("20200906023602_DatabaseV1")]
+    [Migration("20200924013909_DatabaseV1")]
     partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -625,6 +625,12 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                     b.Property<bool>("MinimizeJs")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("StripePublishableKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StripeSecretKey")
+                        .HasColumnType("text");
+
                     b.Property<Guid?>("ThemeKey")
                         .HasColumnType("uuid");
 
@@ -700,35 +706,35 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         new
                         {
                             Id = "993ab932-df4d-47ba-902f-2ec313dc4e73",
-                            ConcurrencyStamp = "dc489134-3373-4ba1-b74d-82f8e6b01dda",
+                            ConcurrencyStamp = "fe9249c2-8fc3-47b2-a5bf-939eda9cac9f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4d323c3f-d805-4932-bb1e-02cc2d0f58b5",
-                            ConcurrencyStamp = "fd5329f8-81f2-4c43-845d-7030f7e332ec",
+                            ConcurrencyStamp = "1b11654a-3fc7-46a1-b2d0-27129cf38764",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed",
-                            ConcurrencyStamp = "e5c51994-9d4b-4cc3-8008-5d8d0fb6717b",
+                            ConcurrencyStamp = "cf2db3cb-0e09-4fbd-860b-be8451e2ef35",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
                             Id = "a7f52a41-4c4c-45e0-9088-a89cb25dea92",
-                            ConcurrencyStamp = "d6cb016c-8e66-4aa6-b12c-5f9787f67705",
+                            ConcurrencyStamp = "37c26757-50e6-4587-bd32-17392b782271",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
                             Id = "e3c7b0e0-88f7-4bd0-b846-66c63db1f614",
-                            ConcurrencyStamp = "580467b5-1a6f-44f7-add1-7b607769071b",
+                            ConcurrencyStamp = "21b76de4-152f-4566-b609-d37204387fb0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -826,13 +832,13 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         {
                             Id = "de0fa044-1d5b-44d7-a93e-66598b2b7c84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03915816-c2a8-47d7-9df6-7e683b9cf8b8",
+                            ConcurrencyStamp = "dc596ab1-40f3-4b0f-9373-28753936c4b8",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBMGlKZzEd+MF6/OPdnur80izOvkz9YKo78IU7YezvAW3SZ1RckymfXHmUBhKiHOQA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB1C922okziyoqvGDLIZUjmOUJg3nDbVamM5yMh1G9/ZTnyfLEgCCjNaTnI9o9j4RA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "13e78fb0-7c40-4012-8a7f-759b15d4c4c7",
+                            SecurityStamp = "1535b280-fc1c-4420-9bed-78d790e418f7",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

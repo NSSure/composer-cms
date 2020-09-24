@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CategoryService extends BaseService {
   get api() {
-    return `${super.api}/api/category/`;
+    return `${super.api}/api/productsystem/category/`;
   }
 
   add(category: Category) {
@@ -18,6 +18,10 @@ export class CategoryService extends BaseService {
 
   update(category: Category) {
     return this.http.post(this.api.concat('update'), category);
+  }
+
+  get(categoryId: string) {
+    return this.http.get<Category>(this.api.concat(`get/${categoryId}`));
   }
 
   list(): Observable<Category[]> {

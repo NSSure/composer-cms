@@ -3,6 +3,7 @@
     <div actions>
       <button class="btn btn-dark" (click)="saveDraft()">Save Draft</button>
       <button class="btn btn-default" (click)="publish()" *ngIf="page.id">Publish</button>
+      <button class="btn btn-link" [routerLink]="['/editor', page.id]">Live Preview</button>
       <button class="btn btn-link" (click)="preview()">Preview</button>
     </div>
     <div content>

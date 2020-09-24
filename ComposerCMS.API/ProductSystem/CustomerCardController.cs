@@ -9,7 +9,7 @@ namespace ComposerCMS.Web.Controllers
     public class CustomerCardController : Controller
     {
         [HttpPost("add")]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add()   
         {
             try
             {

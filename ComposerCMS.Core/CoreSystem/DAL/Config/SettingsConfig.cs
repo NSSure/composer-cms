@@ -15,6 +15,8 @@ namespace ComposerCMS.Core.DAL.Config
             builder.Property(p => p.MinimizeCss);
             builder.Property(p => p.MinimizeJs);
             builder.Property(p => p.ThemeKey).IsRequired(false);
+            builder.Property(p => p.StripePublishableKey);
+            builder.Property(p => p.StripeSecretKey);
             builder.Property(p => p.UserIDLastUpdated);
 
             builder.Ignore(p => p.DateAdded);

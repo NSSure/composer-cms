@@ -40,6 +40,8 @@ import { ProductListComponent } from './components/product-system/product/produc
 import { ProductManageComponent } from './components/product-system/product/product-manage.component';
 import { CategoryListComponent } from './components/product-system/category/category-list.component';
 import { CategoryManageComponent } from './components/product-system/category/category-manage.component';
+import { EditorComponent } from './components/editor/editor.component';
+import { SafePipe } from './pipes/safe-src.pipe';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -76,6 +78,7 @@ const appRoutes: Routes = [
       { path: 'activity', component: ActivityHistoryComponent, data: { pageTitle: 'Activity History' } },
       { path: 'settings', component: SiteSettingsComponent, data: { pageTitle: 'Settings' } },
       { path: 'diff/:pageId/:pageVersionId', component: DiffComponent, data: { pageTitle: 'Diff Comparison' } },
+      { path: 'editor/:pageId', component: EditorComponent, data: { pageTitle: 'Editor' } },
     ]
   }
 ];
@@ -109,10 +112,12 @@ const appRoutes: Routes = [
     PostManageComponent,
     ActiveStateIndicatorComponent,
     CallbackPipe,
+    SafePipe,
     ProductListComponent,
     ProductManageComponent,
     CategoryListComponent,
-    CategoryManageComponent
+    CategoryManageComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

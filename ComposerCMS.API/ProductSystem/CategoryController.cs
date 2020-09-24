@@ -5,6 +5,8 @@ using ComposerCMS.Core.Entity;
 using ComposerCMS.Core.Utilities.ProductSystem;
 using ComposerCMS.Core.Entity.ProductSystem;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComposerCMS.Web.Controllers
 {
@@ -46,6 +48,20 @@ namespace ComposerCMS.Web.Controllers
             }
 
             return StatusCode(200, true);
+        }
+
+        [HttpGet("get/{categoryID}")]
+        public async Task<IActionResult> Update([FromRoute] Guid categoryID)
+        {
+            try
+            {
+                Category _category = await this._productCategoryUtil.Table.Where(a => a.ID == categoryID).FirstOrDefaultAsync();
+                return StatusCode(200, _category);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("list")]
