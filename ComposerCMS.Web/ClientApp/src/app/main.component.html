@@ -6,9 +6,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2 header-input" type="search" placeholder="Search" aria-label="Search" style="background-color: #627285; border: none;">
-          </form>
+          <div class="user-header">
+            <div class="profile-image">{{currentUserLetter}}</div>
+            <div class="user-details">
+              <div class="username">{{currentUsername}}</div>
+              <div class="role">{{currentRole}}</div>
+            </div>
+          </div>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link cursor-pointer" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>

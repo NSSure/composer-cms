@@ -75,7 +75,7 @@ namespace ComposerCMS.Core.DAL
             modelBuilder.ApplyConfiguration(new CategoryConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
 
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.AdminID.ToString(), Name = "Admin", NormalizedName = "Admin".ToUpper() });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.AdminID.ToString(), Name = "System Administrator", NormalizedName = "System Administrator".ToUpper() });
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.EditorID.ToString(), Name = "Editor", NormalizedName = "Editor".ToUpper() });
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.AuthorID.ToString(), Name = "Author", NormalizedName = "Author".ToUpper() });
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = Constants.Permission.Role.ContributorID.ToString(), Name = "Contributor", NormalizedName = "Contributor".ToUpper() });

@@ -1,5 +1,9 @@
 <div #sideMenu id="side-menu" class="side-menu">
   <div class="links">
+    <div style="padding: 15px; display: flex; align-items: center; justify-content: start; font-size: 20px;">
+      <div #menuTitle>Composer <strong>CMS</strong></div>
+      <!--<i (click)="toggleNarrowMenu()" class="fa fa-bars" style="margin: 0;"></i>-->
+    </div>
     <ul>
       <li class="menu-item" title="Forms">
         <div class="menu-link" routerLink="/">
@@ -34,21 +38,21 @@
         </div>
       </li>
       <!-- <li class="menu-item" title="Forms">
-      <div class="menu-link">
-          <a>
-              <i class="fa fa-clone"></i>
-              <span class="menu-item-text">Forms</span>
-          </a>
-      </div>
-  </li>
-  <li class="menu-item" title="Site Preview">
-      <div class="menu-link" routerLink="/preview">
-          <a>
-              <i class="fa fa-search"></i>
-              <span class="menu-item-text">Site Preview</span>
-          </a>
-      </div>
-  </li> -->
+          <div class="menu-link">
+              <a>
+                  <i class="fa fa-clone"></i>
+                  <span class="menu-item-text">Forms</span>
+              </a>
+          </div>
+      </li>
+      <li class="menu-item" title="Site Preview">
+          <div class="menu-link" routerLink="/preview">
+              <a>
+                  <i class="fa fa-search"></i>
+                  <span class="menu-item-text">Site Preview</span>
+              </a>
+          </div>
+      </li> -->
       <li class="menu-item" title="Scripts">
         <div class="menu-link" routerLink="/resources" routerLinkActive="active">
           <a>
@@ -60,7 +64,7 @@
       <li class="menu-item" title="Products">
         <div class="menu-link" routerLink="/products" routerLinkActive="active">
           <a>
-            <i class="fa fa-tag"></i>
+            <i class="fa fa-shopping-bag"></i>
             <span class="menu-item-text">Products</span>
           </a>
         </div>
@@ -114,10 +118,5 @@
         </div>
       </li>
     </ul>
-  </div>
-  <div class="footer">
-      <a #menuToggle class="menu-toggle cursor-pointer" title="Toggle Menu">
-          Toggle
-      </a>
   </div>
 </div>

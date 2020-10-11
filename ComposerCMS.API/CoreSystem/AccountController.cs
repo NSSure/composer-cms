@@ -63,7 +63,9 @@ namespace ComposerCMS.Web.Controllers
                 {
                     string _token = string.Empty;
 
-                    this._authenticationService.IsAuthenticated(userSignIn.UserName, out _token);
+                    var roles = await _userManager.GetRolesAsync(_user);
+
+                    this._authenticationService.IsAuthenticated(userSignIn.UserName, roles[0], out _token);
                     await this._signInManager.SignInAsync(_user, userSignIn.RememberMe);
 
                     return StatusCode(200, new AuthenticatedToken()

@@ -14,11 +14,11 @@ body {
   color: white;
 }
 
-.header-input:focus {
+  .header-input:focus {
     outline: 1px solid white;
     box-shadow: none;
     color: white;
-}
+  }
 
   .header-input::placeholder {
     color: white;
@@ -42,7 +42,7 @@ body {
 }
 
 .key-value {
-  text-align: center;
+  
 }
 
   .key-value > key {
@@ -107,7 +107,7 @@ body {
       }
 
         .side-menu ul .menu-item .menu-link.active {
-          background-color: #253744;
+          background-color: #282828;
         }
 
         .side-menu ul .menu-item .menu-link a {
@@ -115,7 +115,8 @@ body {
         }
 
         .side-menu ul .menu-item .menu-link:hover {
-          background-color: #253744;
+          background-color: #282828;
+          cursor: pointer;
         }
 
         .side-menu ul .menu-item .menu-link a:hover {
@@ -170,7 +171,8 @@ body {
   }
 
     .side-menu-narrow ul li i {
-      font-size: 1.25em;
+      /*font-size: 1.25em;*/
+      margin-right: 0 !important;
     }
 
     .side-menu-narrow ul li .menu-item-text {
@@ -433,4 +435,44 @@ body {
 
 :host {
   display: block
+}
+
+.user-header {
+  display: flex;
+  flex-direction: row;
+}
+
+  .user-header .profile-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background-color: white;
+    margin-right: 15px;
+  }
+
+  .user-header .user-details {
+    line-height: 1.20;
+    align-self: center;
+  }
+
+    .user-header .user-details .username {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .user-header .user-details .role {
+      color: #7E86A4;
+      font-size: 16px;
+    }
+
+.card-key-value {
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  border: 1px solid #dddddd;
+  border-radius: 12px;
 }

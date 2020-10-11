@@ -7,7 +7,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class SideMenuComponent {
   @ViewChild('sideMenu', { static: true }) sideMenu: ElementRef;
-  @ViewChild('menuToggle', { static: true }) menuToggle: ElementRef;
+  @ViewChild('menuTitle', { static: true }) menuTitle: ElementRef;
+
+  isNarrowMenu: boolean = false;
 
   ngAfterViewInit(): void {
     var menuItems = this.sideMenu.nativeElement.querySelectorAll(".menu-item");
@@ -32,14 +34,18 @@ export class SideMenuComponent {
     for (var i = 0; i < subMenus.length; i++) {
       subMenus[i].classList.add('hidden');
     }
+  }
 
-    this.menuToggle.nativeElement.addEventListener('click', (event) => {
-      if (this.sideMenu.nativeElement.classList.contains('side-menu-narrow')) {
-        this.sideMenu.nativeElement.classList.remove('side-menu-narrow');
-      }
-      else {
-        this.sideMenu.nativeElement.classList.add('side-menu-narrow');
-      }
-    });
+  toggleNarrowMenu() {
+    if (this.sideMenu.nativeElement.classList.contains('side-menu-narrow')) {
+      this.sideMenu.nativeElement.classList.remove('side-menu-narrow');
+      this.menuTitle.nativeElement.classList.remove('hidden');
+      this.isNarrowMenu = false;
+    }
+    else {
+      this.sideMenu.nativeElement.classList.add('side-menu-narrow');
+      this.menuTitle.nativeElement.classList.add('hidden');
+      this.isNarrowMenu = true;
+    }
   }
 }

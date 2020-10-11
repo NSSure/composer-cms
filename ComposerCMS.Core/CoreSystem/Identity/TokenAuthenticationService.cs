@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -17,13 +16,16 @@ namespace ComposerCMS.Core.Identity
             _tokenManagement = tokenManagement.Value;
         }
 
-        public bool IsAuthenticated(string identifier, out string token)
+        public bool IsAuthenticated(string identifier, string role, out string token)
         {
             token = string.Empty;
 
             var claim = new[]
             {
-                new Claim(ClaimTypes.Name, identifier)
+                new Claim("name", identifier),
+                new Claim("role", role)
+                //new Claim(ClaimTypes.Name, identifier),
+                //new Claim(ClaimTypes.Role, role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));

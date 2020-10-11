@@ -6,6 +6,18 @@ import { AccountService } from './services/account.service';
   templateUrl: './main.component.html'
 })
 export class MainComponent {
+  get currentUserLetter() {
+    return this._accountService.currentUsername.charAt(0);
+  }
+
+  get currentUsername() {
+    return this._accountService.currentUsername;
+  }
+
+  get currentRole() {
+    return this._accountService.currentRole;
+  }
+
   constructor(private _accountService: AccountService) {
 
   }

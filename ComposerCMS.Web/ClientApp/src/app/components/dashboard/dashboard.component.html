@@ -1,53 +1,47 @@
 <app-page hideBanner="true">
   <div content>
     <div *ngIf="dashboardStats">
-      <div class="jumbotron">
-        <h4>Welcome to Composer CMS</h4>
-        <hr>
-        <p>Enterprise CMS with integrated document management, digital asset management, and role based access.</p>
-      </div>
-
       <label>Stats Overview</label>
 
       <div class="row">
         <div class="col-md-12 col-lg-6">
           <div class="row">
             <div class="col">
-              <div class="card mb-4">
+              <div class="card mb-4 shadow-sm card-key-value">
                 <div class="card-body">
                   <div class="key-value">
                     <h2 class="key">{{dashboardStats.pageCount}}</h2>
-                    <span>Pages</span>
+                    <span>Page(s)</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card mb-4">
+              <div class="card mb-4 shadow-sm card-key-value">
                 <div class="card-body">
                   <div class="key-value">
                     <h2 class="key">{{dashboardStats.blogCount}}</h2>
-                    <span>Blogs</span>
+                    <span>Blog(s)</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card mb-4">
+              <div class="card mb-4 shadow-sm card-key-value">
                 <div class="card-body">
                   <div class="key-value">
                     <h2 class="key">{{dashboardStats.postCount}}</h2>
-                    <span>Posts</span>
+                    <span>Post(s)</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card mb-4">
+              <div class="card mb-4 shadow-sm card-key-value">
                 <div class="card-body">
                   <div class="key-value">
                     <h2 class="key">{{dashboardStats.menuCount}}</h2>
-                    <span>Menus</span>
+                    <span>Menu(s)</span>
                   </div>
                 </div>
               </div>

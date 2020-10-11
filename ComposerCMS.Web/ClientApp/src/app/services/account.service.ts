@@ -58,6 +58,18 @@ export class AccountService extends BaseService {
     return true;
   }
 
+  get currentUsername() {
+    if (this.token) {
+      return this.token.name;
+    }
+  }
+
+  get currentRole() {
+    if (this.token) {
+      return this.token.role;
+    }
+  }
+
   register(userRegistration: UserRegistration) {
     return this.http.post(this.api + 'register', userRegistration, this.httpOptions);
   }
@@ -71,9 +83,13 @@ export class AccountService extends BaseService {
   }
 
   login(userSignIn: UserSignIn) {
-    this.http.post<string>(this.api + 'login', userSignIn, this.httpOptions).subscribe(token => {
+    this.http.post<string>(this.api + 'login', userSignIn, this.httpOptions).subscribe(userToken => {
       this.setIsAuthenticated(true);
-      localStorage.setItem('userToken', JSON.stringify(token));
+
+      localStorage.setItem('userToken', JSON.stringify(userToken));
+
+      console.log(this.currentUsername);
+      console.log(this.currentRole);
     });
   }
 }
