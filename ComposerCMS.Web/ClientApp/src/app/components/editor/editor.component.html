@@ -6,13 +6,13 @@
     </div>
   </div>
   <div class="editor-preview" *ngIf="previewSrc">
-    <iframe [src]="previewSrc | safe"></iframe>
+    <iframe [src]="previewSrc | safe" class="shadow-sm"></iframe>
   </div>
 </div>
 
 <style>
   .editor-component {
-    height: 100%;
+    height: calc(100% - 56px);
   }
 
   .editor-ribbon {
@@ -24,12 +24,19 @@
     height: 100%;
     width: 100%;
     overflow-y: auto;
+    padding: 30px;
+    background-color: #f7f7f7;
+    overflow: hidden;
   }
 
   iframe {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    border: none;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 12px;
   }
 
   div[content] {
