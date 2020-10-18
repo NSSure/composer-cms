@@ -477,3 +477,37 @@ body {
   border: 1px solid #dddddd;
   border-radius: 12px;
 }
+
+.card-default {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+  border-radius: 8px;
+  border: none;
+}
+
+  .card-default .card-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .card-default.parent-card .card-default .card-header {
+      border-radius: 0;
+  }
+
+  .card-default.parent-card .card-default {
+      border-radius: 0;
+      box-shadow: none;
+  }
+
+  .card-default .card-body {
+      padding: 0;
+  }
+
+  .card-default .card-default-section {
+    border-top: 1px solid #cccccc;
+    padding: 1rem !important;
+  }
+
+  .card-default .card-header {
+      font-weight: bold;
+      font-size: 18px;
+  }

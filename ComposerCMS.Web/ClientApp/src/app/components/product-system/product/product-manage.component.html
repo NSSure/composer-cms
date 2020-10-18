@@ -1,1 +1,110 @@
-Product manage
+<div>
+  <app-page>
+    <div actions>
+      <button class="btn btn-dark" (click)="saveDraft()">Save product</button>
+    </div>
+    <div content>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="card card-default parent-card bg-light mb-3">
+            <div class="card-header">Configuration</div>
+            <div class="card-body">
+              <div class="card-default-section">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" placeholder="Enter a product title">
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea class="form-control" rows="5"></textarea>
+                </div>
+              </div>
+              <div class="card-default-section">
+                <p class="card-text">Drag product image(s) here to upload.</p>
+                <button type="button" class="btn btn-dark">Upload image(s)</button>
+              </div>
+              <div class="card-default-section">
+                <div class="form-group mb-0">
+                  <label>Classification</label>
+                  <select class="form-control">
+                    <option value="individual">Individual product</option>
+                    <option value="variant">Variant source</option>
+                  </select>
+                  <small id="ClassificationHelp" class="form-text text-muted">If the item has have any variants like color, size, etc simply set the classification to 'individual'.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-default bg-light mb-3">
+            <div class="card-header">Variant Defaults</div>
+            <div class="card-body">
+              <div class="card-default-section">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label>Price</label>
+                      <input type="text" class="form-control" placeholder="Enter the product price">
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label>Cost</label>
+                      <input type="text" class="form-control" placeholder="Enter the product cost">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-default-section">
+                <div class="form-group form-check mb-0">
+                  <input type="checkbox" class="form-check-input" id="IsPhysical">
+                  <label class="form-check-label" for="IsPhysical">Is product physical item?</label>
+                </div>
+              </div>
+              <div class="card-default-section">
+                <div class="form-group form-check mb-0">
+                  <input type="checkbox" class="form-check-input" id="TrackInventory">
+                  <label class="form-check-label" for="TrackInventory">Track Inventory?</label>
+                </div>
+              </div>
+              <div class="card-default-section">
+                <p class="lead">Inventory configuration</p>
+                <div class="form-group">
+                  <label>SKU</label>
+                  <input type="text" class="form-control" placeholder="Enter the product SKU">
+                </div>
+                <div class="form-group">
+                  <label>Quantity</label>
+                  <input type="text" class="form-control" placeholder="Enter the product quantity">
+                </div>
+                <div class="form-group form-check mb-0">
+                  <input type="checkbox" class="form-check-input" id="AllowOutOfStockPurchases">
+                  <label class="form-check-label" for="AllowOutOfStockPurchases">Allow out of stock purchases?</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="card shadow-sm mb-4">
+            <table class="table table-centered mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a class="cursor-pointer">
+                      Product variant
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-page>
+</div>

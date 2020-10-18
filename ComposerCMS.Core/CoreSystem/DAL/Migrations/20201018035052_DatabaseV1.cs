@@ -353,15 +353,17 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(maxLength: 128, nullable: true),
                     Description = table.Column<string>(maxLength: 1024, nullable: true),
-                    SKU = table.Column<string>(maxLength: 36, nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    Cost = table.Column<decimal>(nullable: false),
-                    TrackQuantity = table.Column<bool>(nullable: false, defaultValue: true),
-                    Quantity = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsPhysical = table.Column<bool>(nullable: false, defaultValue: true),
                     HasVariants = table.Column<bool>(nullable: false, defaultValue: false),
+                    Price = table.Column<decimal>(nullable: true),
+                    Cost = table.Column<decimal>(nullable: true),
+                    Vendor = table.Column<string>(nullable: true),
+                    ProductTypeID = table.Column<Guid>(nullable: true),
+                    SKU = table.Column<string>(maxLength: 36, nullable: true),
+                    TrackQuantity = table.Column<bool>(nullable: false, defaultValue: true),
+                    IsPhysical = table.Column<bool>(nullable: false, defaultValue: true),
                     AllowOutOfStockPurchases = table.Column<bool>(nullable: false, defaultValue: false),
                     IsPublished = table.Column<bool>(nullable: false, defaultValue: false),
+                    Quantity = table.Column<int>(nullable: true, defaultValue: 0),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateLastUpdated = table.Column<DateTime>(nullable: false),
                     UserIDAdded = table.Column<Guid>(nullable: false),
@@ -483,17 +485,17 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "fe9249c2-8fc3-47b2-a5bf-939eda9cac9f", "Admin", "ADMIN" },
-                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "1b11654a-3fc7-46a1-b2d0-27129cf38764", "Editor", "EDITOR" },
-                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "cf2db3cb-0e09-4fbd-860b-be8451e2ef35", "Author", "AUTHOR" },
-                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "37c26757-50e6-4587-bd32-17392b782271", "Contributor", "CONTRIBUTOR" },
-                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "21b76de4-152f-4566-b609-d37204387fb0", "User", "USER" }
+                    { "993ab932-df4d-47ba-902f-2ec313dc4e73", "f0c6d7a4-3a6b-41dc-9446-fa3e550bf2e5", "System Administrator", "SYSTEM ADMINISTRATOR" },
+                    { "4d323c3f-d805-4932-bb1e-02cc2d0f58b5", "7d3dcf77-c95a-4db4-a83b-933aa01d525d", "Editor", "EDITOR" },
+                    { "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed", "697c2d3a-9d81-414a-b9d5-3f347a6195cd", "Author", "AUTHOR" },
+                    { "a7f52a41-4c4c-45e0-9088-a89cb25dea92", "308dea27-2ee2-4e1b-a96c-49c3f68992bf", "Contributor", "CONTRIBUTOR" },
+                    { "e3c7b0e0-88f7-4bd0-b846-66c63db1f614", "aeae8a39-f529-4385-8ecb-962fab8e9655", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "dc596ab1-40f3-4b0f-9373-28753936c4b8", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEB1C922okziyoqvGDLIZUjmOUJg3nDbVamM5yMh1G9/ZTnyfLEgCCjNaTnI9o9j4RA==", null, false, "1535b280-fc1c-4420-9bed-78d790e418f7", false, "Admin" });
+                values: new object[] { "de0fa044-1d5b-44d7-a93e-66598b2b7c84", 0, "fdcfe80e-aeaa-4caa-a7a8-fe306660448c", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEGw31r8RBKmJaAqMfsnrvE91trNLdIDvBDk3pOmb+5ISmd/V4cmNZiLgBVbmOkw6FQ==", null, false, "55e878b7-b917-4933-9204-411045407915", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

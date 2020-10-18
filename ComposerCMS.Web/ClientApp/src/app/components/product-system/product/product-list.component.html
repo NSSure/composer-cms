@@ -1,1 +1,30 @@
-Product list
+<app-page>
+  <div actions>
+    <button type="button" class="btn btn-primary" routerLink="/product">Create New Product</button>
+  </div>
+  <div content>
+    <div class="card shadow-sm mb-4">
+      <table class="table table-centered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <a class="cursor-pointer" [routerLink]="['/product', product.id]">
+                {{product.name}}
+              </a>
+            </td>
+          </tr>
+          <tr *ngIf="products.length === 0">
+            <td colspan="1">
+              There are no products to display
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page>

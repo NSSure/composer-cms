@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
 {
     [DbContext(typeof(ComposerCMSContext))]
-    [Migration("20200924013909_DatabaseV1")]
+    [Migration("20201018035052_DatabaseV1")]
     partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -517,7 +517,7 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 
-                    b.Property<decimal>("Cost")
+                    b.Property<decimal?>("Cost")
                         .HasColumnType("numeric");
 
                     b.Property<DateTime>("DateAdded")
@@ -545,10 +545,13 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("Quantity")
+                    b.Property<Guid?>("ProductTypeID")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("Quantity")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
@@ -571,6 +574,9 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
 
                     b.Property<Guid>("UserIDLastUpdated")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Vendor")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -706,35 +712,35 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         new
                         {
                             Id = "993ab932-df4d-47ba-902f-2ec313dc4e73",
-                            ConcurrencyStamp = "fe9249c2-8fc3-47b2-a5bf-939eda9cac9f",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            ConcurrencyStamp = "f0c6d7a4-3a6b-41dc-9446-fa3e550bf2e5",
+                            Name = "System Administrator",
+                            NormalizedName = "SYSTEM ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "4d323c3f-d805-4932-bb1e-02cc2d0f58b5",
-                            ConcurrencyStamp = "1b11654a-3fc7-46a1-b2d0-27129cf38764",
+                            ConcurrencyStamp = "7d3dcf77-c95a-4db4-a83b-933aa01d525d",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "de6f9df8-d8ef-4dc4-b0b0-fc2dc2c51aed",
-                            ConcurrencyStamp = "cf2db3cb-0e09-4fbd-860b-be8451e2ef35",
+                            ConcurrencyStamp = "697c2d3a-9d81-414a-b9d5-3f347a6195cd",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
                             Id = "a7f52a41-4c4c-45e0-9088-a89cb25dea92",
-                            ConcurrencyStamp = "37c26757-50e6-4587-bd32-17392b782271",
+                            ConcurrencyStamp = "308dea27-2ee2-4e1b-a96c-49c3f68992bf",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
                             Id = "e3c7b0e0-88f7-4bd0-b846-66c63db1f614",
-                            ConcurrencyStamp = "21b76de4-152f-4566-b609-d37204387fb0",
+                            ConcurrencyStamp = "aeae8a39-f529-4385-8ecb-962fab8e9655",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -832,13 +838,13 @@ namespace ComposerCMS.Core.CoreSystem.DAL.Migrations
                         {
                             Id = "de0fa044-1d5b-44d7-a93e-66598b2b7c84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc596ab1-40f3-4b0f-9373-28753936c4b8",
+                            ConcurrencyStamp = "fdcfe80e-aeaa-4caa-a7a8-fe306660448c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB1C922okziyoqvGDLIZUjmOUJg3nDbVamM5yMh1G9/ZTnyfLEgCCjNaTnI9o9j4RA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGw31r8RBKmJaAqMfsnrvE91trNLdIDvBDk3pOmb+5ISmd/V4cmNZiLgBVbmOkw6FQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1535b280-fc1c-4420-9bed-78d790e418f7",
+                            SecurityStamp = "55e878b7-b917-4933-9204-411045407915",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
