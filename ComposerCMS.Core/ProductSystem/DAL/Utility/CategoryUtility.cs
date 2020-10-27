@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 namespace ComposerCMS.Core.Utilities.ProductSystem
 {
-    public class ProductUtility : BaseRepository<Product>
+    public class CategoryUtility : BaseRepository<Category>
     {
         private readonly RouteUtility _routeUtil;
 
-        public ProductUtility(RouteUtility routeUtil, UserResolver userResolver) : base(userResolver)
+        public CategoryUtility(RouteUtility routeUtil, UserResolver userResolver) : base(userResolver)
         {
             this._routeUtil = routeUtil;
         }
 
-        public async Task ProcessNewProduct(Product product)
+        public async Task ProcessNewCategory(Category category)
         {
             using (IDbContextTransaction transaction = this.ComposerCMSContext.Database.BeginTransaction())
             {
                 try
                 {
-                    await this.AddAsync(product);
-                    await this._routeUtil.TryProcessRoute(product.ID, product.Title, Constants.Route.ProductBaseUrl);
+                    await this.AddAsync(category);
+                    await this._routeUtil.TryProcessRoute(category.ID, category.Name, "category");
                     await transaction.CommitAsync();
                 }
                 catch (Exception ex)
                 {
                     await transaction.RollbackAsync();
-                    throw ex;
                 }
             }
         }

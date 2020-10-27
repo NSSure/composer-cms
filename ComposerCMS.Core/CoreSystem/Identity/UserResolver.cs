@@ -2,6 +2,7 @@
 using System;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ComposerCMS.Core.Identity
 {
@@ -18,7 +19,7 @@ namespace ComposerCMS.Core.Identity
 
         public async Task<Guid> GetCurrentUserIDAsync()
         {
-            string _currentUserName = this._httpContextAccessor.HttpContext.User.Identity.Name;
+            string _currentUserName = this._httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(a => a.Type == "name").Value;
 
             IdentityUser _currentUser = await this._userManager.FindByNameAsync(_currentUserName);
 

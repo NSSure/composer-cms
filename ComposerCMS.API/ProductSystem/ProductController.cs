@@ -34,6 +34,20 @@ namespace ComposerCMS.Web.Controllers
             return StatusCode(200, true);
         }
 
+        [HttpGet("get/{productID}")]
+        public async Task<IActionResult> Add([FromRoute] Guid productID)
+        {
+            try
+            {
+                Product _product = await this._productUtil.Table.FirstOrDefaultAsync(a => a.ID == productID);
+                return StatusCode(200, _product);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpGet("list")]
         public async Task<IActionResult> ListAllProducts()
         {

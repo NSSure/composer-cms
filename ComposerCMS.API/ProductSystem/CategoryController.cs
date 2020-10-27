@@ -13,9 +13,9 @@ namespace ComposerCMS.Web.Controllers
     [Route("api/productsystem/category")]
     public class CategoryController : Controller
     {
-        private readonly ProductCategoryUtility _productCategoryUtil;
+        private readonly CategoryUtility _productCategoryUtil;
 
-        public CategoryController(ProductCategoryUtility productCategoryUtil)
+        public CategoryController(CategoryUtility productCategoryUtil)
         {
             this._productCategoryUtil = productCategoryUtil;
         }
@@ -25,7 +25,7 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                await this._productCategoryUtil.ProcessNewProductCategory(productCategory);
+                await this._productCategoryUtil.ProcessNewCategory(productCategory);
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                await this._productCategoryUtil.ProcessNewProductCategory(productCategory);
+                await this._productCategoryUtil.ProcessNewCategory(productCategory);
             }
             catch (Exception ex)
             {

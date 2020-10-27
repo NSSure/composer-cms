@@ -14,7 +14,7 @@ namespace ComposerCMS.Web.Models.System.ProductSystem
     public class CategoriesModel : PageModel
     {
         private readonly RouteUtility _routeUtil;
-        private readonly ProductCategoryUtility _productCategoryUtil;
+        private readonly CategoryUtility _productCategoryUtil;
 
         [BindProperty]
         public List<Category> ProductCategories { get; set; }
@@ -22,7 +22,7 @@ namespace ComposerCMS.Web.Models.System.ProductSystem
         [BindProperty]
         public Dictionary<Guid, Route> RouteMap { get; set; } = new Dictionary<Guid, Route>();
 
-        public CategoriesModel(ProductCategoryUtility productCategoryUtil, RouteUtility routeUtil)
+        public CategoriesModel(CategoryUtility productCategoryUtil, RouteUtility routeUtil)
         {
             this._productCategoryUtil = productCategoryUtil;
             this._routeUtil = routeUtil;

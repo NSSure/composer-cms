@@ -14,12 +14,15 @@
           <tr *ngFor="let product of products">
             <td>
               <a class="cursor-pointer" [routerLink]="['/product', product.id]">
-                {{product.name}}
+                {{product.title}}
               </a>
+            </td>
+            <td>
+
             </td>
           </tr>
           <tr *ngIf="products.length === 0">
-            <td colspan="1">
+            <td colspan="2">
               There are no products to display
             </td>
           </tr>

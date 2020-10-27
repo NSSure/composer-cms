@@ -154,8 +154,10 @@ namespace ComposerCMS.API
             services.AddTransient<PostUtility>();
             services.AddTransient<RouteUtility>();
 
-            services.AddTransient<ProductCategoryUtility>();
+            // Product system injections.
+            services.AddTransient<CategoryUtility>();
             services.AddTransient<ProductUtility>();
+            services.AddTransient<ProductCategoryUtility>();
 
             services.AddTransient<UserResolver>();
             services.AddScoped<IAuthenticationService, TokenAuthenticationService>();

@@ -19,7 +19,9 @@ export class CategoryManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._categoryService.get(this.categoryId).subscribe((category) => this.category = category);
+    if (this.categoryId) {
+      this._categoryService.get(this.categoryId).subscribe((category) => this.category = category);
+    }
   }
 
   save() {

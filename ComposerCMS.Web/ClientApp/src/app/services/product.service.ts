@@ -11,6 +11,14 @@ export class ProductService extends BaseService {
     return `${super.api}/api/productsystem/product/`;
   }
 
+  add(product: any): Observable<any> {
+    return this.http.post<any>(this.api.concat('add'), product)
+  }
+
+  get(productId: string): Observable<Product> {
+    return this.http.get<Product>(this.api.concat('get/' + productId));
+  }
+
   list(): Observable<Product[]> {
     return this.http.get<Product[]>(this.api.concat('list'))
   }
