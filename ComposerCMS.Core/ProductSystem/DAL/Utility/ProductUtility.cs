@@ -1,6 +1,11 @@
-﻿using ComposerCMS.Core.Entity.ProductSystem;
+﻿using ComposerCMS.Core.CoreSystem.GraphQL;
+using ComposerCMS.Core.Entity.ProductSystem;
 using ComposerCMS.Core.Identity;
+using ComposerCMS.Core.ProductSystem.GraphQL.Query;
 using ComposerCMS.Core.Utility;
+using GraphQL;
+using GraphQL.NewtonsoftJson;
+using GraphQL.Types;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Threading.Tasks;
@@ -32,6 +37,21 @@ namespace ComposerCMS.Core.Utilities.ProductSystem
                     throw ex;
                 }
             }
+        }
+
+        public async Task<string> GraphQLTest(GraphQLRequest request)
+        {
+            var schema = new Schema
+            {
+                Query = new ProductDTOQuery()
+            };
+
+            var json = await schema.ExecuteAsync(_ =>
+            {
+                _.Query = request.Query;
+            });
+
+            return json;
         }
     }
 }

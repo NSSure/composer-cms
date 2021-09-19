@@ -72,7 +72,7 @@ namespace ComposerCMS.Web.Controllers
         {
             try
             {
-                await this._productCategoryUtil.Unassign(productID, categoryID);
+                await this._productCategoryUtil.Unassign(productID, Guid.Empty);
             }
             catch (Exception ex)
             {

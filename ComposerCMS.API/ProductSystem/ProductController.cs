@@ -6,6 +6,10 @@ using ComposerCMS.Core.Utilities.ProductSystem;
 using ComposerCMS.Core.Entity.ProductSystem;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using ComposerCMS.Core.CoreSystem.GraphQL;
+using GraphQL.Types;
+using ComposerCMS.Core.ProductSystem.GraphQL.Query;
+using GraphQL;
 
 namespace ComposerCMS.Web.Controllers
 {
@@ -55,6 +59,30 @@ namespace ComposerCMS.Web.Controllers
             {
                 List<Product> _products = await this._productUtil.Table.ToListAsync();
                 return StatusCode(200, _products);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("graphql")]
+        public async Task<IActionResult> Add([FromBody] GraphQLRequest request)
+        {
+            try
+            {
+                var schema = new Schema
+                {
+                    Query = new ProductDTOQuery()
+                };
+
+                var result = await new DocumentExecuter().ExecuteAsync(doc => {
+                    doc.Schema = schema;
+                    doc.Query = request.Query;
+                })
+                .ConfigureAwait(false);
+
+                return StatusCode(200, result);
             }
             catch (Exception ex)
             {

@@ -67,7 +67,7 @@ namespace ComposerCMS.Core.Utilities.ProductSystem
         public async Task<Category> ListCategoriesByProduct(Guid productID)
         {
             List<Guid> _categoryIDs = await this.Table.Where(a => a.ProductID == productID).Select(a => a.CategoryID).ToListAsync();
-            return await this 
+            return new Category();
         }
     }
 }

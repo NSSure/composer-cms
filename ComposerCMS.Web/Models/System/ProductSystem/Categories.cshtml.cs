@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using ComposerCMS.Core.Entity;
@@ -15,6 +16,7 @@ namespace ComposerCMS.Web.Models.System.ProductSystem
     {
         private readonly RouteUtility _routeUtil;
         private readonly CategoryUtility _productCategoryUtil;
+        private readonly ProductUtility _productUtil;
 
         [BindProperty]
         public List<Category> ProductCategories { get; set; }
@@ -22,14 +24,25 @@ namespace ComposerCMS.Web.Models.System.ProductSystem
         [BindProperty]
         public Dictionary<Guid, Route> RouteMap { get; set; } = new Dictionary<Guid, Route>();
 
-        public CategoriesModel(CategoryUtility productCategoryUtil, RouteUtility routeUtil)
+        public CategoriesModel(CategoryUtility productCategoryUtil, RouteUtility routeUtil, ProductUtility productUtil)
         {
             this._productCategoryUtil = productCategoryUtil;
             this._routeUtil = routeUtil;
+            this._productUtil = productUtil;
+        }
+
+        public class t
+        {
+            public string query { get; set; } = "{id name}"; 
         }
 
         public async Task OnGet()
         {
+            var t = this._productUtil.GraphQLTest(new Core.CoreSystem.GraphQL.GraphQLRequest()
+            {
+                Query = "query { product { id name categories { id name description } } }"
+            });
+
             this.ProductCategories = this._productCategoryUtil.ListAll();
 
             if (this.ProductCategories.Count > 0)
